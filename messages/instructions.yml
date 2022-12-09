@@ -1,0 +1,13 @@
+examples:
+  supernaturals:
+    instructions: |-
+      `<title text="Supernaturals">`
+      `<p>`Become a Vampire or Werewolf!
+      `<p>`(WIP) Vampire and Werewolf mobs will spawn,
+      `<p>`Fighting them might infect you too though!
+      `<p>`Certain skills are unlocked the longer you are
+      `<p>`a certain species/the more you use your powers.
+      `<p>`Be careful, both species have certain weaknesses!
+      `<li>``<command command="mmob spawn vampire_mob" text="Click here to spawn a Vampire.">`
+      `<li>``<command command="mmob spawn werewolf_mob" text="Click here to spawn a Werewolf">`
+      `<p>`&e Work In Progress
