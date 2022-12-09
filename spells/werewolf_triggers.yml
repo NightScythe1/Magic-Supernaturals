@@ -1,0 +1,53 @@
+werewolf_triggers:
+  inherit: werewolf_base
+  name: Werewolf Triggers
+  mode: hidden
+  passive: true
+  triggers:
+    - sneak
+  actions:
+    cast:
+    - class: Interval
+      duration: 20000
+      actions:
+        - class: CheckRequirements
+          requirements:
+            - attributes:
+              - attribute: werewolf_moons
+                min: 9.0
+          fail:
+            - class: Stop
+          actions:
+            - class: CheckInventory
+              item: air
+              invert: false
+              slot: mainhand
+              fail:
+                - class: Stop
+              actions:
+                - class: CheckInventory
+                  item: air
+                  invert: false
+                  slot: offhand
+                  fail:
+                    - class: Stop
+                  actions:
+                    - class: CheckTrigger
+                      trigger: right_click
+                      actions:
+                        - class: Cast
+                          spell: werewolf_sniff
+                        - class: Delay
+                          delay: 3000
+                    - class: CheckTrigger
+                      trigger: swap
+                      actions:
+                        - class: Cast
+                          spell: werewolf_transform
+                        - class: Stop
+                    - class: CheckTrigger
+                      trigger: stop_sneak
+                      actions:
+                        - class: Stop
+  parameters:
+    target: self

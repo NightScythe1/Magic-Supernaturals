@@ -1,0 +1,80 @@
+vampire_eat:
+  inherit: vampire_base
+  name: Vampirism
+  mode: hidden
+  passive: true
+  triggers:
+    - trigger: consume
+  actions:
+    cast:
+    - class: CheckInventory
+      slot: main_hand
+      item: blood_bottle
+      fail:
+        - class: CheckInventory
+          slot: off_hand
+          item: blood_bottle
+          actions:
+            - class: Stop
+      actions:
+        - class: Stop
+    - class: CheckInventory
+      slot: main_hand
+      item: honey_bottle
+      fail:
+        - class: CheckInventory
+          slot: off_hand
+          item: honey_bottle
+          actions:
+            - class: PlayEffects
+              effect: eaten
+            - class: Feed
+              feed: -8
+            - class: PotionEffect
+              duration: 10000
+              add_effects:
+                hunger: 0
+                confusion: 0
+      actions:
+        - class: PlayEffects
+          effect: eaten
+        - class: Feed
+          feed: -8
+        - class: PotionEffect
+          duration: 10000
+          add_effects:
+            hunger: 0
+            confusion: 0
+    - class: Delay
+      delay: 50
+    - class: CheckInventory
+      slot: main_hand
+      item: potion
+      fail:
+        - class: CheckInventory
+          item: glass_bottle
+          slot: main_hand
+          fail:
+            - class: CheckInventory
+              item: glass_bottle
+              slot: off_hand
+              fail:
+                - class: PlayEffects
+                  effect: eaten
+                - class: Feed
+                  feed: -8
+                - class: PotionEffect
+                  duration: 10000
+                  add_effects:
+                    hunger: 0
+                    confusion: 0
+  effects:
+    eaten:
+    - location: target
+    - sound: entity_husk_death
+      sound_pitch: 0
+  parameters:
+    target: self
+    effects_particles: false
+    range: 32
+    damage: 4

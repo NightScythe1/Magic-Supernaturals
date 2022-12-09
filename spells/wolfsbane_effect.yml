@@ -1,0 +1,65 @@
+wolfsbane_effect:
+  inherit: werewolf_base
+  passive: true
+  mode: hidden
+  cancel_effects: true
+  actions:
+    cast:
+    - class: Interval
+      duration: 5000
+      actions:
+            - class: Retarget
+              actions:
+                - class: AreaOfEffect
+                  radius: 2
+                  actions:
+                    - class: ChangeContext
+                      use_target_mage: true
+                      actions:
+                        - class: CheckRequirements
+                          requirements:
+                            - class:
+                                - werewolf
+                          actions:
+                            - class: PotionEffect
+                              duration: 5500
+                              add_effects:
+                                slow: 0
+                                slow_digging: 0
+                                weakness: 0
+                            - class: Cancel
+                              spells:
+                                - werewolf_transform
+                            - class: ApplyCooldown
+                              target_caster: false
+                              duration: 10000
+                              spells:
+                                - werewolf_mob_transform
+                                - werewolf_mob_slash
+                                - werewolf_slash
+                                - werewolf_transform
+                                - werewolf_sniff
+                                - werewolf_triggers
+                                - werewolf_check
+  effects:
+    cast:
+     - location: origin
+       source_location: feet
+       target_location: feet
+       effectlib:
+          class: Sphere
+          radius: 2.75
+          duration: 5000
+          particle: town_aura
+          iterations: 2
+          particles: 2
+          particle_count: 2
+          update_locations: false
+  parameters:
+    target: self
+    cooldown: 5000
+    target_type: LivingEntity
+    cancel_on_death: true
+    cancel_on_damage: true
+    effects_particles: false
+    range: 3

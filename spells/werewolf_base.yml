@@ -1,0 +1,7 @@
+werewolf_base:
+  passive: true
+  mode: hidden
+  hidden: true
+  effects:
+    deactivate: []
+    cooldown: []

@@ -1,0 +1,10 @@
+# Use a special RP
+resource_pack: "https://github.com/NightScythe1/Magic-Supernaturals-RP/archive/refs/heads/main.zip"
+
+# Use a different RP when combined with other configs
+# add_resource_pack: "http://<somewhere else or maybe same place? not sure eventually this would be a combined one>.zip"
+
+# Alternate resource packs can be accessed with /getrp <pack>
+alternate_resource_packs:
+  supernaturals:
+    url: "https://github.com/NightScythe1/Magic-Supernaturals-RP/archive/refs/heads/main.zip"

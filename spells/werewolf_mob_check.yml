@@ -1,0 +1,104 @@
+werewolf_mob_check:
+  inherit: werewolf_base
+  name: Lycanthropy
+  mode: hidden
+  passive: true
+  triggers:
+    - trigger: interval
+      interval: 2000
+  actions:
+    cast:
+    - class: Interval
+      duration: 2000
+      actions:
+        - class: CheckRequirements
+          requirement:
+            moon:
+              value: 4
+          actions:
+            - class: ApplyCooldown
+              duration: 2500
+              spells:
+                - werewolf_sniff
+                - werewolf_transform
+                - werewolf_triggers
+                - werewolf_fullmoon
+                - werewolf_mob_transform
+            - class: PotionEffect
+              add_effects:
+                slow: 0
+                weakness: 0
+                slow_digging: 0
+          fail:
+            - class: CheckRequirements
+              requirement:
+                indoors: true
+              actions:
+                - class: Stop
+            - class: CheckRequirements
+              requirement:
+                time:
+                  min: dusk
+                  max: dawn
+              fail:
+                - class: Stop
+            - class: CheckRequirements
+              requirement:
+                weather: clear
+              fail:
+                - class: Stop
+              actions:
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 7
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 6
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 5
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 3
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 2
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 1
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+                - class: CheckRequirements
+                  requirement:
+                    moon:
+                      value: 0
+                  actions:
+                    - class: Cast
+                      spell: werewolf_mob_transform
+    - class: Cast
+      spell: anticheese
+  parameters:
+    target: self
+    effects_particles: false

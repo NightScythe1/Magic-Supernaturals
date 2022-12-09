@@ -1,0 +1,195 @@
+werewolf_transform:
+  inherit: werewolf_base
+  name: Werewolf Transform
+  mode: hidden
+  passive: true
+  toggle: cancel
+  actions:
+    cast:
+    - class: Interval
+      duration: 5000
+      interval: rand(300,600)
+      actions:
+        - class: CheckInventory
+          slot: helmet
+          item: air
+          fail:
+            - class: Message
+              message: "&cI can't change while wearing this..."
+              message_type: action_bar
+            - class: Stop
+        - class: CheckInventory
+          slot: chestplate
+          item: air
+          fail:
+            - class: Message
+              message: "&cI can't change while wearing this..."
+              message_type: action_bar
+            - class: Stop
+        - class: CheckInventory
+          slot: leggings
+          item: air
+          fail:
+            - class: Message
+              message: "&cI can't change while wearing this..."
+              message_type: action_bar
+            - class: Stop
+        - class: CheckInventory
+          slot: boots
+          item: air
+          fail:
+            - class: Message
+              message: "&cI can't change while wearing this..."
+              message_type: action_bar
+            - class: Stop
+        - class: CheckInventory
+          slot: offhand
+          item: air
+          fail:
+            - class: Message
+              message: "&cI can't change while holding this..."
+              message_type: action_bar
+            - class: Stop
+        - class: Damage
+          damage: 0.1
+    - class: Delay
+      delay: 800
+    - class: PlayEffects
+      effect: transform
+    - class: Interval
+      duration: 180000
+      actions:
+        - class: ApplyCooldown
+          duration: 120000
+          spells:
+            - werewolf_transform
+        - class: CheckRequirements
+          requirement:
+            moon:
+              value: 4
+          actions:
+            - class: Stop
+        - class: CheckInventory
+          slot: helmet
+          item: air
+          fail:
+            - class: Message
+              message: "&cMy armor is crushing me!"
+              message_type: action_bar
+            - class: Damage
+              damage: 4
+        - class: CheckInventory
+          slot: chestplate
+          item: air
+          fail:
+            - class: Message
+              message: "&cMy armor is crushing me!"
+              message_type: action_bar
+            - class: Damage
+              damage: 4
+        - class: CheckInventory
+          slot: leggings
+          item: air
+          fail:
+            - class: Message
+              message: "&cMy armor is crushing me!"
+              message_type: action_bar
+            - class: Damage
+              damage: 4
+        - class: CheckInventory
+          slot: boots
+          item: air
+          fail:
+            - class: Message
+              message: "&cMy armor is crushing me!"
+              message_type: action_bar
+            - class: Damage
+              damage: 4
+        - class: CheckInventory
+          slot: offhand
+          item: air
+          fail:
+            - class: Message
+              message: "&cMy offhand is crushing me!"
+              message_type: action_bar
+            - class: Damage
+              damage: 4
+        - class: Disarm
+          keep_in_inventory: true
+        - class: Disguise
+          disguise:
+            type: wolf
+        - class: PotionEffect
+          effects_particles: false
+          add_effects:
+            damage_resistance: 1
+            increase_damage: 1
+            speed: 1
+            jump: 0
+            slow_digging: 2
+        - class: CheckTrigger
+          trigger: right_click
+          actions:
+            - class: Cast
+              spell: werewolf_sniff
+        - class: CheckTrigger
+          trigger: kill
+          actions:
+            - class: PotionEffect
+              effects_particles: false
+              duration: 3000
+              add_effects:
+                regeneration: 0
+            - class: Feed
+              feed: 5
+              saturation: 10
+  effects:
+    undo:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: explosion_normal
+        particle_data: 0.01
+        particle_count: 100
+        particle_offset_y: 0.8
+        particle_offset_x: 0.4
+        particle_offset_z: 0.4
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_pitch: 2
+      sound_volume: 0.1
+    - sound: entity_wolf_whine
+      sound_volume: 0.5
+    cast:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: smoke_normal
+        particle_data: 0.01
+        particle_count: 2
+        duration: 6000
+        particle_offset_y: 0.5
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_volume: 0.2
+      sound_pitch: -2
+    transform:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: spit
+        particle_data: 0.01
+        particle_count: 100
+        particle_offset_y: 0.8
+        particle_offset_x: 0.4
+        particle_offset_z: 0.4
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_converted
+    - sound: entity_wolf_howl
+      sound_volume: 0.5
+  parameters:
+    target: self
+    undo: 500

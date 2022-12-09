@@ -1,0 +1,4 @@
+blood_bottle:
+  name: "&fBlood Bottle"
+  icon: honey_bottle{87001}
+  consume_spell:

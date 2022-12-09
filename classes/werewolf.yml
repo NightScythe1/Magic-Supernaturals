@@ -1,0 +1,12 @@
+werewolf:
+    name: Werewolf
+    inherit: caster
+    passive: true
+    locked: true
+    interval: 1000
+    spells:
+    - werewolf_sniff
+    - werewolf_triggers
+    - werewolf_check
+    - werewolf_transform
+    - werewolf_slash

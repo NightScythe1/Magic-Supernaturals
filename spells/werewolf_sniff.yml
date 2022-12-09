@@ -1,0 +1,65 @@
+werewolf_sniff:
+    name: Sniff
+    mode: hidden
+    passive: true
+    actions:
+        cast:
+         - class: Asynchronous
+           actions:
+             - class: CheckRequirements
+               fail:
+                 - class: PlayEffects
+                   effect: weather
+               requirement:
+                 weather: clear
+               actions:
+                 - class: PlayEffects
+                   effect: track
+                 - class: Delay
+                   delay: 1500
+    effects:
+        weather:
+        -  class: EffectSingle
+           sound: entity_fox_sniff
+           location: origin
+           sound_volume: 2
+           sound_pitch: -2
+        - sound: entity_wolf_whine
+          delay: 1500
+          sound_pitch: 0.9
+          sound_volume: 0.3
+        track:
+        -  class: EffectSingle
+           sound: entity_fox_sniff
+           location: origin
+           sound_volume: 2
+           sound_pitch: -2
+        - particle: vibration
+          location: origin
+          particle_arrival_time: 30
+          particle_count: 1
+          particle_offset_x: 0.1
+          particle_offset_y: 0.1
+          particle_offset_z: 0.1
+        - requires_entity_target: true
+          delay: 1500
+          sound: entity_wolf_growl
+          sound_pitch: 1.25
+          sound_volume: 0.3
+        - requires_no_entity_target: true
+          delay: 1500
+          sound: entity_wolf_whine
+          sound_pitch: 0.9
+          sound_volume: 0.3
+    parameters:
+        range: 32
+        fov: 3
+        close_fov: 3
+        fov_weight: 400
+        player_weight: 500
+        target: other_entity
+        target_type: LivingEntity
+        ignore_blocks: true
+        loud: true
+        target_invisible: true
+        cooldown: 3000

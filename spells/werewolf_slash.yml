@@ -1,0 +1,102 @@
+werewolf_slash:
+  inherit: werewolf_base
+  passive: true
+  mode: hidden
+  name: Bite
+  triggers:
+    - left_click
+  actions:
+    cast:
+    - class: CheckRequirements
+      requirements:
+        - attributes:
+          - attribute: werewolf_moons
+            min: 0.5
+      fail:
+        - class: Stop
+    - class: CheckInventory
+      slot: main_hand
+      item: air
+      actions:
+        - class: ConeOfEffect
+          actions:
+            - class: Damage
+            - class: Velocity
+              y_offset: 0.3
+              push: 0.7
+            - class: Probability
+              probability: 0.004
+              actions:
+                - class: CheckEntity
+                  allowed_entities:
+                    - player
+                  actions:
+                    - class: ChangeContext
+                      use_target_mage: true
+                      actions:
+                       - class: CheckRequirements
+                         requirements:
+                           - class:
+                             - vampire
+                             - werewolf
+                         fail:
+                            - class: ChangeContext
+                              swap_source_and_target: false
+                              actions:
+                                - class: CheckInventory
+                                  slot: helmet
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+                                - class: CheckInventory
+                                  slot: chestplate
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+                                - class: CheckInventory
+                                  slot: leggings
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+                                - class: CheckInventory
+                                  slot: boots
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+            - class: PlayEffects
+              effect: slash
+            - class: ChangeContext
+              target_caster: true
+              actions:
+                - class: ApplyCooldown
+                  duration: 2000
+                  spells:
+                    - werewolf_slash
+  effects:
+    slash:
+    - location: target
+      effectlib:
+        class: Particle
+        particle: sweep_attack
+        particle_offset_x: 0.3
+        particle_offset_y: 0.3
+        particle_offset_z: 0.3
+        particle_count: 3
+    - sound: entity_player_attack_sweep
+    - sound: block_grindstone_use
+      sound_pitch: 2
+  parameters:
+    damage: (increase_damage*3 + 8)/2
+    magic_damage: false
+    target: self
+    target_type: LivingEntity
+    range: 3.5
+    fov: 0.1

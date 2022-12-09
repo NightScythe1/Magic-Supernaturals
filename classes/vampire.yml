@@ -1,0 +1,17 @@
+vampire:
+    name: Vampire
+    inherit: caster
+    passive: true
+    locked: true
+    interval: 1000
+    weakness:
+      fire: 0.2
+      burn: 0.2
+      lava: 0.2
+      hot_floor: 0.2
+    spells:
+    - vampire_check
+    - vampire_eat
+    - vampire_lifesteal
+    - vampire_bite
+    - vampire_triggers

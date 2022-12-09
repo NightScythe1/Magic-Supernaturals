@@ -1,0 +1,8 @@
+wolfsbane_stew_craft:
+  output: wolfsbane_stew
+  type: shapeless
+  ingredients:
+    - bowl
+    - wolfsbane
+    - red_mushroom
+    - brown_mushroom

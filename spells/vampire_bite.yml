@@ -1,0 +1,255 @@
+vampire_bite:
+  inherit: vampire_base
+  passive: true
+  mode: hidden
+  name: Bite
+  triggers:
+    - left_click
+  actions:
+    cast:
+      - class: CheckInventory
+        slot: main_hand
+        item: air
+        actions:
+          - class: Interval
+            requires_entity_target: true
+            duration: 3000
+            interval: 100
+            actions:
+              - class: ConeOfEffect
+                requires_entity_target: true
+                target: other
+                target_count: 1
+                actions:
+                  - class: CheckEntity
+                    denied_entities:
+                      - skeleton
+                      - zombie
+                      - zombie_villager
+                      - stray
+                      - husk
+                      - wither_skeleton
+                      - wither
+                      - zombified_piglin
+                      - phantom
+                      - zoglin
+                      - zombie_horse
+                      - skeleton_horse
+                    fail:
+                      - class: Stop
+                    actions:
+                      - class: CheckHealth
+                        min_health: 2
+                        fail:
+                          - class: Stop
+                        actions:
+                          - class: ChangeContext
+                            use_target_mage: true
+                            actions:
+                             - class: CheckRequirements
+                               requirements:
+                                 - class:
+                                   - vampire
+                                   - werewolf
+                               fail:
+                                  - class: Probability
+                                    probability: 0.0002
+                                    actions:
+                                      - class: ChangeContext
+                                        swap_source_and_target: false
+                                        actions:
+                                          - class: CheckInventory
+                                            slot: helmet
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                                          - class: CheckInventory
+                                            slot: chestplate
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                                          - class: CheckInventory
+                                            slot: leggings
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                                          - class: CheckInventory
+                                            slot: boots
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                          - class: Damage
+                            damage: 0.4
+                          - class: Velocity
+                            speed: 0
+                          - class: PotionEffect
+                            duration: 150
+                            add_effects:
+                              slow: 1
+                          - class: ApplyCooldown
+                            target_caster: true
+                            duration: 10000
+                            spells:
+                              - vampire_bite
+                          - class: PlayEffects
+                            effect: blood
+                          - class: ChangeContext
+                            use_target_mage: true
+                            actions:
+                              - class: CheckRequirements
+                                requirements:
+                                  - class:
+                                    - vampire
+                                actions:
+                                  - class: ChangeContext
+                                    target_caster: true
+                                    actions:
+                                          - class: CheckInventory
+                                            item: glass_bottle
+                                            slot: off_hand
+                                            actions:
+                                              - class: Skip
+                                                skip: 12
+                                                actions:
+                                                  - class: TakeItem
+                                                    item: glass_bottle
+                                                    full_stack: false
+                                                  - class: GiveItem
+                                                    item: vampire_blood_bottle
+                                            fail:
+                                             - class: ChangeContext
+                                               swap_source_and_target: true
+                                               actions:
+                                                  - class: Cast
+                                                    spell: vampire_bloodtracker
+                                                    spell_parameters:
+                                                      value: "x+1"
+                                                      cooldown: 10000
+                                                  - class: ApplyCooldown
+                                                    target_caster: true
+                                                    duration: 10000
+                                                    spells:
+                                                     - vampire_bite
+                                                  - class: CheckRequirements
+                                                    requirements:
+                                                      - attributes:
+                                                          - attribute: hunger
+                                                            max: 20.0
+                                                    fail:
+                                                      - class: PotionEffect
+                                                        duration: 20000
+                                                        add_effects:
+                                                          hunger: 0
+                                                          confusion: 0
+                                                      - class: Feed
+                                                        feed: 1.0
+                                                        saturation: 30
+                                                      - class: Heal
+                                                        amount: 0.2
+                                                      - class: ApplyCooldown
+                                                        duration: 3000
+                                                        spells:
+                                                         - vampire_lifesteal
+                                                    actions:
+                                                      - class: PotionEffect
+                                                        duration: 20000
+                                                        add_effects:
+                                                          hunger: 0
+                                                          confusion: 0
+                                                      - class: Feed
+                                                        feed: 1.0
+                                                        saturation: 15
+                                                      - class: ApplyCooldown
+                                                        duration: 1500
+                                                        spells:
+                                                         - vampire_lifesteal
+                                fail:
+                                  - class: ChangeContext
+                                    target_caster: true
+                                    actions:
+                                          - class: CheckInventory
+                                            item: glass_bottle
+                                            slot: off_hand
+                                            actions:
+                                              - class: Skip
+                                                skip: 12
+                                                actions:
+                                                  - class: TakeItem
+                                                    item: glass_bottle
+                                                    full_stack: false
+                                                  - class: GiveItem
+                                                    item: blood_bottle
+                                            fail:
+                                             - class: ChangeContext
+                                               swap_source_and_target: true
+                                               actions:
+                                                  - class: Cast
+                                                    spell: vampire_bloodtracker
+                                                    spell_parameters:
+                                                      value: "x+1"
+                                                      cooldown: 10000
+                                                  - class: ApplyCooldown
+                                                    target_caster: true
+                                                    duration: 10000
+                                                    spells:
+                                                     - vampire_bite
+                                                  - class: CheckRequirements
+                                                    requirements:
+                                                      - attributes:
+                                                          - attribute: hunger
+                                                            max: 20.0
+                                                    fail:
+                                                      - class: Feed
+                                                        feed: 1
+                                                        saturation: 30
+                                                      - class: Heal
+                                                        amount: 0.8
+                                                      - class: ApplyCooldown
+                                                        duration: 3000
+                                                        spells:
+                                                         - vampire_lifesteal
+                                                    actions:
+                                                      - class: Feed
+                                                        feed: 1.5
+                                                        saturation: 15
+                                                      - class: ApplyCooldown
+                                                        duration: 1500
+                                                        spells:
+                                                         - vampire_lifesteal
+  effects:
+    blood:
+    - location: target
+      sound: entity_phantom_bite
+      sound_volume: 0.1
+      source_location: body
+      material: redstone_block
+      effectlib:
+        class: Sphere
+        offset: 0,-0.1,0
+        duration: 500
+        particle: block_crack
+        radius: 0.2
+        particles: 3
+    - sound: entity_generic_drink
+      sound_pitch: 0
+      sound_volume: 0.2
+  parameters:
+    cancel_on_damage: 3
+    cancel_on_kill_target: true
+    cancel_on_cast_other: true
+    cancel_on_death: true
+    knockback_resistance: 2
+    no_damage_ticks: 0
+    target: self
+    target_self: false
+    target_type: LivingEntity
+    range: 1.5
+    fov: 0.1

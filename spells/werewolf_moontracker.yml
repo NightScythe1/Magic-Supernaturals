@@ -1,0 +1,11 @@
+werewolf_moontracker:
+  inherit: werewolf_base
+  actions:
+    cast:
+    - class: ModifyAttribute
+      bypass_undo: true
+      attribute: "werewolf_moons"
+  parameters:
+    target: self
+    cooldown: 600000
+    value:

@@ -1,0 +1,11 @@
+vampire_bloodtracker:
+  inherit: vampire_base
+  actions:
+    cast:
+    - class: ModifyAttribute
+      bypass_undo: true
+      attribute: "vampire_bloods"
+  parameters:
+    target: self
+    cooldown: 10000
+    value:

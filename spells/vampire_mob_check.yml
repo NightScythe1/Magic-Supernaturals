@@ -1,0 +1,106 @@
+vampire_mob_check:
+  inherit: vampire_base
+  name: Vampirism
+  mode: hidden
+  passive: true
+  triggers:
+    - trigger: interval
+      interval: 2000
+  actions:
+    cast:
+    - class: Interval
+      duration: 2000
+      actions:
+        - class: CheckRequirements
+          requirement:
+            indoors: false
+          actions:
+            - class: CheckRequirements
+              requirement:
+                time:
+                  min: 0
+                  max: 12000
+              actions:
+                - class: CheckRequirements
+                  requirement:
+                    weather: clear
+                  actions:
+                    - class: ApplyCooldown
+                      duration: 1500
+                      spells:
+                        - vampire_mob_bite
+                        - vampire_mob_lifesteal
+                    - class: PotionEffect
+                      add_effects:
+                        weakness: 0
+                    - class: Ignite
+                    - class: PlayEffects
+                      effect: burning
+        - class: CheckRequirements
+          requirement:
+            light:
+              min: -1
+              max: 9
+          actions:
+            - class: Cast
+              spell: vampire_mob_transform
+        - class: CheckRequirements
+          requirement:
+            light:
+              min: -1
+              max: 1
+          actions:
+            - class: PotionEffect
+              duration: 3500
+              add_effects:
+                speed: 2
+                damage_resistance: 1
+                increase_damage: 0
+        - class: CheckRequirements
+          requirement:
+            light:
+              min: 0
+              max: 3
+          actions:
+            - class: PotionEffect
+              duration: 3500
+              add_effects:
+                speed: 2
+                damage_resistance: 0
+        - class: CheckRequirements
+          requirement:
+            light:
+              min: 2
+              max: 6
+          actions:
+            - class: PotionEffect
+              duration: 3500
+              add_effects:
+                speed: 1
+        - class: CheckRequirements
+          requirement:
+            light:
+              min: 5
+              max: 9
+          actions:
+            - class: PotionEffect
+              duration: 3500
+              add_effects:
+                speed: 0
+  effects:
+    burning:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: smoke_normal
+        particle_data: 0.01
+        particle_count: 4
+        duration: 100
+        particle_offset_x: 0.2
+        particle_offset_z: 0.2
+        particle_offset_y: 0.6
+        offset: 0,0,0
+  parameters:
+    target: self
+    effects_particles: false

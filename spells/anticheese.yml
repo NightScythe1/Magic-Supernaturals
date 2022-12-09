@@ -1,0 +1,8 @@
+anticheese:
+  actions:
+    cast:
+        - class: Mount
+          dismount: true
+  parameters:
+    range: 3
+    target: self

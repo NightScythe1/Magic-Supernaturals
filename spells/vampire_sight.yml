@@ -1,0 +1,37 @@
+vampire_sight:
+  name: Sight
+  mode: hidden
+  passive: true
+  actions:
+    cast:
+      - class: CheckPotionEffects
+        required:
+          - night_vision
+        actions:
+          - class: PlayEffects
+            effect: see
+          - class: PotionEffect
+            remove_effects:
+              - night_vision
+        fail:
+          - class: CheckRequirements
+            requirement:
+              light:
+                min: -1
+                max: 8.0
+            fail:
+              - class: PlaySound
+                sound: block_candle_extinguish
+            actions:
+            - class: PlayEffects
+              effect: see
+            - class: PotionEffect
+              duration: 600000
+              add_effects:
+                night_vision: 0
+  effects:
+    see:
+    - sound: block_amethyst_block_step
+  parameters:
+    target: self
+    effects_particles: false

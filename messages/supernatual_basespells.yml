@@ -1,0 +1,29 @@
+spells:
+  vampire_base:
+    fail: '&cSomething went wrong! Tell Night#8582'
+    cooldown: ''
+    charges: ''
+    cancelled: ''
+    cancel: ''
+    cancel_selection: ''
+  vampire_transform:
+    fail: '&cSomething went wrong! Tell Night#8582'
+    cooldown: a:&eYou must wait &6$time
+    charges: ''
+    cancelled: ''
+    cancel: ''
+    cancel_selection: ''
+  werewolf_base:
+    fail: '&cSomething went wrong! Tell Night#8582'
+    cooldown: ''
+    charges: ''
+    cancelled: ''
+    cancel: ''
+    cancel_selection: ''
+  werewolf_transform:
+    fail: '&cSomething went wrong! Tell Night#8582'
+    cooldown: a:&eYou must wait &6$time
+    charges: ''
+    cancelled: ''
+    cancel: ''
+    cancel_selection: ''

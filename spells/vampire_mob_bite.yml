@@ -1,0 +1,180 @@
+vampire_mob_bite:
+  inherit: werewolf_base
+  passive: true
+  mode: hidden
+  name: Bite
+  actions:
+    cast:
+        - class: Mount
+          dismount: true
+          eject: true
+        - class: ChangeContext
+          source_offset: 0,12,0
+          target_offset: 0,12,0
+          actions:
+            - class: AreaOfEffect # consider this an extra anticheese
+              radius: 5
+              y_radius: 10
+              actions:
+                - class: Velocity
+                  pull: 1
+                - class: PotionEffect
+                  duration: 5000
+                  add_effects:
+                    confusion: 0
+                - class: PlaySound
+                  requires_entity_target: true
+                  sound: entity_wolf_howl
+                  volume: 0.8
+                - class: PlaySound
+                  requires_entity_target: true
+                  sound: entity_wolf_growl
+                  volume: 0.8
+        - class: Interval
+          duration: 3000
+          interval: 300
+          actions:
+              - class: ConeOfEffect
+                target: other
+                target_count: 1
+                actions:
+                  - class: CheckEntity
+                    denied_entities:
+                      - skeleton
+                      - zombie
+                      - zombie_villager
+                      - stray
+                      - husk
+                      - wither_skeleton
+                      - wither
+                      - zombified_piglin
+                      - phantom
+                      - zoglin
+                      - zombie_horse
+                      - skeleton_horse
+                    fail:
+                      - class: Stop
+                    actions:
+                      - class: CheckHealth
+                        min_health: 2
+                        fail:
+                          - class: Stop
+                        actions:
+                          - class: Probability
+                            probability: 0.003
+                            actions:
+                              - class: ChangeContext
+                                use_target_mage: true
+                                actions:
+                                 - class: CheckRequirements
+                                   requirements:
+                                     - class:
+                                       - vampire
+                                       - werewolf
+                                   fail:
+                                      - class: ChangeContext
+                                        swap_source_and_target: false
+                                        actions:
+                                          - class: CheckInventory
+                                            slot: helmet
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                                          - class: CheckInventory
+                                            slot: chestplate
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                                          - class: CheckInventory
+                                            slot: leggings
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                                          - class: CheckInventory
+                                            slot: boots
+                                            item: air
+                                            actions:
+                                              - class: ModifyMage
+                                                modify_type: unlock
+                                                mage_class: vampire
+                          - class: Damage
+                            damage: 0.5
+                          - class: PotionEffect
+                            duration: 150
+                            add_effects:
+                              slow: 1
+                          - class: PlayEffects
+                            effect: blood
+                          - class: ChangeContext
+                            target_caster: true
+                            actions:
+                              - class: CheckRequirements
+                                requirements:
+                                  - attributes:
+                                      - attribute: damage_dealt
+                                        min: 0.3
+                                fail:
+                                - class: Stop
+                                actions:
+                                  - class: ApplyCooldown
+                                    duration: 10000
+                                    spells:
+                                     - vampire_mob_bite
+                                  - class: CheckRequirements
+                                    requirements:
+                                      - attributes:
+                                          - attribute: hunger
+                                            max: 20.0
+                                    fail:
+                                      - class: Feed
+                                        feed: 1
+                                        saturation: 30
+                                      - class: Heal
+                                        amount: 0.8
+                                      - class: ApplyCooldown
+                                        duration: 3000
+                                        spells:
+                                         - vampire_mob_lifesteal
+                                    actions:
+                                      - class: Feed
+                                        feed: 1
+                                        saturation: 15
+                                      - class: ApplyCooldown
+                                        duration: 1500
+                                        spells:
+                                         - vampire_mob_lifesteal
+  effects:
+    blood:
+    - location: target
+      sound: entity_phantom_bite
+      sound_volume: 0.1
+      source_location: body
+      material: redstone_block
+      effectlib:
+        class: Sphere
+        offset: 0,-0.1,0
+        duration: 500
+        particle: block_crack
+        radius: 0.2
+        particles: 3
+    - sound: entity_generic_drink
+      sound_pitch: 0
+      sound_volume: 0.2
+  parameters:
+    cancel_on_damage: 3
+    cancel_on_kill_target: true
+    cancel_on_cast_other: true
+    cancel_on_death: true
+    knockback_resistance: 2
+    no_damage_ticks: 0
+    magic_damage: false
+    target: self
+    target_type: LivingEntity
+    range: 1.5
+    fov: 0.1

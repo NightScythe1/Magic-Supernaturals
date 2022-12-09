@@ -1,0 +1,13 @@
+vampire_blood_eat:
+  inherit: vampire_base
+  actions:
+    cast:
+     - class: Delay
+       delay: 100
+     - class: ModifyMage
+       mage_class: vampire
+       modify_type: unlock
+     - class: GiveItem
+       item: glass_bottle
+  parameters:
+    target: self

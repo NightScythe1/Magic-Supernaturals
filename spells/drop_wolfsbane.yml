@@ -1,0 +1,8 @@
+drop_wolfsbane:
+  actions:
+    cast:
+    - class: DropItem
+      item: wolfsbane
+  parameters:
+    range: 4
+    target: self

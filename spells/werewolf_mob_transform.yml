@@ -1,0 +1,127 @@
+werewolf_mob_transform:
+  inherit: werewolf_base
+  name: Werewolf Transform
+  mode: hidden
+  passive: true
+  cancel_effects: true
+  actions:
+    cast:
+    - class: Interval
+      duration: 3000
+      interval: rand(150,300)
+      actions:
+        - class: ApplyCooldown
+          duration: 1000
+          spells:
+            - werewolf_fullmoon
+            - werewolf_transform
+            - werewolf_triggers
+            - werewolf_mob_transform
+        - class: CheckRequirements
+          requirement:
+            indoors: true
+          actions:
+            - class: Stop
+        - class: CheckRequirements
+          requirement:
+            weather: clear
+          fail:
+            - class: Stop
+        - class: Damage
+          damage: 0.1
+    - class: Delay
+      delay: 800
+    - class: PlayEffects
+      effect: transform
+    - class: Interval
+      duration: 600000
+      actions:
+        - class: CheckRequirements
+          requirement:
+            time:
+              min: dusk
+              max: dawn
+          fail:
+            - class: Stop
+        - class: Disarm
+          keep_in_inventory: true
+        - class: Disguise
+          disguise:
+            type: wolf
+        - class: ApplyCooldown
+          duration: 2000
+          spells:
+            - werewolf_fullmoon
+            - werewolf_mob_transform
+            - werewolf_transform
+        - class: PotionEffect
+          effects_particles: false
+          add_effects:
+            damage_resistance: 2
+            increase_damage: 0
+            jump: 0
+            speed: 0
+            slow_digging: 2
+        - class: CheckTrigger
+          trigger: kill
+          actions:
+            - class: PotionEffect
+              effects_particles: false
+              duration: 3000
+              add_effects:
+                regeneration: 1
+            - class: Feed
+              feed: 8
+              saturation: 15
+  effects:
+    undo:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: explosion_normal
+        particle_data: 0.01
+        particle_count: 100
+        particle_offset_y: 0.8
+        particle_offset_x: 0.4
+        particle_offset_z: 0.4
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_pitch: 2
+      sound_volume: 0.1
+    - sound: entity_wolf_whine
+      sound_volume: 0.5
+    cast:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: smoke_large
+        particle_data: 0.01
+        particle_count: 2
+        particle_size: 2
+        duration: 5000
+        particle_offset_y: 0.5
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_volume: 0.2
+      sound_pitch: -2
+    transform:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: spit
+        particle_data: 0.01
+        particle_count: 100
+        particle_offset_y: 0.8
+        particle_offset_x: 0.4
+        particle_offset_z: 0.4
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_converted
+    - sound: entity_wolf_howl
+      sound_volume: 3.5
+  parameters:
+    target: self
+    undo: 500
+    cooldown: 1000

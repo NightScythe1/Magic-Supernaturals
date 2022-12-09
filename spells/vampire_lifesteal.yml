@@ -1,0 +1,87 @@
+vampire_lifesteal:
+  inherit: vampire_base
+  passive: true
+  mode: hidden
+  name: Lifesteal
+  triggers:
+    - trigger: damage_dealt
+      damage_type: physical
+  actions:
+    cast:
+     - class: CheckEntity
+       denied_entities:
+         - skeleton
+         - zombie
+         - zombie_villager
+         - stray
+         - husk
+         - wither_skeleton
+         - wither
+         - zombified_piglin
+         - phantom
+         - zoglin
+         - zombie_horse
+         - skeleton_horse
+       fail:
+         - class: Stop
+       actions:
+         - class: CheckRequirements
+           requirements:
+             - attributes:
+               - attribute: vampire_bloods
+                 min: 0.5
+           fail:
+             - class: Stop
+           actions:
+             - class: ChangeContext
+               target_caster: true
+               actions:
+                 - class: CheckRequirements
+                   requirements:
+                     - attributes:
+                         - attribute: damage_dealt
+                           min: 5.0
+                   actions:
+                     - class: PlayEffects
+                       effect: blood
+                     - class: CheckRequirements
+                       requirements:
+                         - attributes:
+                             - attribute: hunger
+                               max: 15.0
+                       fail:
+                         - class: Feed
+                           feed: damage_dealt/5
+                           saturation: damage_dealt*3
+                         - class: Heal
+                           amount: damage_dealt/10
+                         - class: ApplyCooldown
+                           duration: 4000
+                           spells:
+                            - vampire_lifesteal
+                       actions:
+                         - class: Feed
+                           feed: damage_dealt/5
+                           saturation: damage_dealt*3
+                         - class: ApplyCooldown
+                           duration: 2000
+                           spells:
+                            - vampire_lifesteal
+
+  effects:
+    blood:
+    - location: target
+      source_location: wand
+      relative_target_offset: 1,-0.2,0.2
+      material: redstone_block
+      effectlib:
+        class: Sphere
+        duration: 100
+        particle: block_crack
+        radius: 0.1
+        particles: 5
+    - sound: entity_generic_drink
+      sound_pitch: 0
+      sound_volume: 0.2
+  parameters:
+    target: damage_target

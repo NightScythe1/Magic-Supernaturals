@@ -1,0 +1,110 @@
+vampire_mob_transform:
+  inherit: vampire_base
+  name: Vampire Transform
+  mode: hidden
+  passive: true
+  actions:
+    cast:
+    - class: PlayEffects
+      effect: transform
+    - class: Interval
+      duration: 10000
+      actions:
+        - class: ApplyCooldown
+          duration: 16000
+          spells:
+            - vampire_mob_transform
+        - class: CheckRequirements
+          requirement:
+            indoors: true
+          fail:
+            - class: CheckRequirements
+              requirement:
+                weather: clear
+              actions:
+                - class: CheckRequirements
+                  requirement:
+                    time:
+                     min: 0
+                     max: 12000
+                  actions:
+                    - class: Stop
+        - class: Disguise
+          disguise:
+            type: bat
+        - class: PotionEffect
+          effects_particles: false
+          add_effects:
+            damage_resistance: 1
+            slow_digging: 2
+            slow_falling: 0
+        - class: Skip
+          skip: 5
+          actions:
+            - class: AreaOfEffect
+              radius: 24
+              actions:
+                - class: Orient
+                  orient_target: false
+        - class: CheckTrigger
+          trigger: kill
+          actions:
+            - class: Feed
+              feed: 6
+            - class: Heal
+              amount: 3
+        - class: Velocity
+          speed: 0.4
+  effects:
+    undo:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: smoke_large
+        particle_data: 0.01
+        particle_count: 100
+        particle_offset_y: 0.8
+        particle_offset_x: 0.4
+        particle_offset_z: 0.4
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_pitch: 2
+      sound_volume: 0.1
+    - sound: entity_bat_hurt
+      sound_volume: 0.5
+    cast:
+    - location: origin
+      source_location: body
+      material: redstone_block
+      effectlib:
+        class: Particle
+        particle: block_crack
+        particle_data: 0.01
+        particle_count: 2
+        duration: 500
+        particle_offset_y: 0.5
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_volume: 0.2
+      sound_pitch: -2
+    transform:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: smoke_large
+        particle_data: 0.01
+        particle_count: 100
+        particle_offset_y: 0.8
+        particle_offset_x: 0.4
+        particle_offset_z: 0.4
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_converted
+    - sound: entity_bat_ambient
+      sound_volume: 0.5
+  parameters:
+    target: self
+    cancel_on_world_change: true
+    cancel_on_death: true
+    undo: 500

@@ -1,0 +1,56 @@
+vampire_mob_lifesteal:
+  inherit: vampire_base
+  passive: true
+  mode: hidden
+  name: Lifesteal
+  actions:
+    cast:
+     - class: CheckRequirements
+       requirements:
+         - attributes:
+             - attribute: damage_dealt
+               min: 3.0
+       actions:
+         - class: PlayEffects
+           effect: blood
+         - class: CheckRequirements
+           requirements:
+             - attributes:
+                 - attribute: damage_dealt
+                   min: 1.0
+           actions:
+             - class: Feed
+               feed: damage_dealt/5
+               saturation: damage_dealt*3
+             - class: Heal
+               amount: damage_dealt/10
+             - class: ApplyCooldown
+               duration: 6000
+               spells:
+                - vampire_mob_lifesteal
+           fail:
+             - class: Feed
+               feed: damage_dealt/5
+               saturation: damage_dealt*3
+             - class: ApplyCooldown
+               duration: 3500
+               spells:
+                - vampire_mob_lifesteal
+
+  effects:
+    blood:
+    - location: target
+      source_location: wand
+      relative_target_offset: 1,-0.2,0.2
+      material: redstone_block
+      effectlib:
+        class: Sphere
+        duration: 100
+        particle: block_crack
+        radius: 0.1
+        particles: 5
+    - sound: entity_generic_drink
+      sound_pitch: 0
+      sound_volume: 0.2
+  parameters:
+    target: self

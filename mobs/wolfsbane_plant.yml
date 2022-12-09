@@ -1,0 +1,22 @@
+wolfsbane_plant:
+  type: armor_stand
+  disguise:
+    type: armor_stand
+    invisible: true
+  helmet: cornflower{87002}
+  disabled_slots: 4144959
+  transformable: false
+  default_drops: false
+  silent: true
+  interval: 1000
+  interval_requires_target: false
+  interact_spell:
+  interact_spell_source: mob
+  interact_spell_target: player
+  triggers:
+    spawn:
+      cast: wolfsbane_check
+    interval:
+      cast: wolfsbane_check
+    death:
+      cast: drop_wolfsbane

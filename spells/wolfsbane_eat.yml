@@ -1,0 +1,106 @@
+wolfsbane_eat:
+  inherit: werewolf_base
+  actions:
+    cast:
+    - class: CheckRequirements
+      requirements:
+        - attributes:
+            - attribute: werewolf_moons
+              max: 10
+      actions:
+        - class: ModifyMage
+          mage_class: werewolf
+          modify_type: lock
+        - class: ModifyAttribute
+          bypass_undo: true
+          attribute: "werewolf_moons"
+          value: 0
+        - class: Command
+          console: true
+          command: mage remove @p werewolf_transform
+        - class: Command
+          console: true
+          command: mage remove @p werewolf_triggers
+        - class: Command
+          console: true
+          command: mage remove @p werewolf_sniff
+        - class: Command
+          console: true
+          command: mage remove @p werewolf_slash
+        - class: Command
+          console: true
+          command: mage remove @p werewolf_check
+        - class: Command
+          console: true
+          command: mage remove @p werewolf_fullmoon
+        - class: PlayEffects
+          effect: cured
+      fail:
+       - class: CheckRequirements
+         requirements:
+           - attributes:
+               - attribute: werewolf_moons
+                 min: 9.5
+         actions:
+           - class: ApplyCooldown
+             duration: 600000
+             spells:
+              - werewolf_slash
+              - werewolf_sniff
+              - werewolf_transform
+              - werewolf_triggers
+              - werewolf_check
+           - class: PotionEffect
+             effects_particles: false
+             duration: 600000
+             add_effects:
+               slow: 0
+               slow_digging: 0
+               weakness: 0
+           - class: PlayEffects
+             effect: nerfed
+    - class: Delay
+      delay: 100
+    - class: GiveItem
+      item: bowl
+  effects:
+    nerfed:
+    - sound: entity_wolf_hurt
+      sound_volume: 0.5
+      location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_z: 0.3
+        particle_offset_y: 0.7
+        particle: smoke_normal
+        particle_data: 0.01
+        particle_count: 5
+        particle_size: 5
+        duration: 3000
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_volume: 0.5
+    cured:
+    - sound: entity_wolf_death
+      sound_volume: 0.5
+    - sound: entity_zombie_villager_cure
+      sound_volume: 0.5
+    - sound: entity_zombie_villager_converted
+      location: origin
+      source_location: body
+      sound_volume: 0.5
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_z: 0.3
+        particle_offset_y: 0.7
+        particle: cloud
+        particle_data: 0.01
+        particle_count: 2
+        particle_size: 2
+        duration: 1000
+        offset: 0,-0.5,0
+  parameters:
+    target: self

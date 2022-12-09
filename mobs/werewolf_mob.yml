@@ -1,0 +1,60 @@
+werewolf_mob:
+  name: Werewolf
+  track_radius: 64
+  remove_when_far_away: false
+  class: werewolf
+  type: vindicator
+  item: air
+  offhand: air
+  helmet: air
+  chestplate: air
+  leggings: air
+  boots: air
+  health: 20
+  drop_xp: 30
+  drops_require_player_killer: true
+  transformable: false
+  default_drops: false
+  interval: 2000
+  interval_requires_target: false
+  potion_effects:
+    damage_resistance: 0
+  protection:
+    projectile: 0.3
+  entity_attributes:
+    generic_follow_range: 64
+    generic_attack_damage: 4
+  brain:
+    remove_default_goals: false
+  triggers:
+    spawn:
+      effects:
+      - sound: entity_wolf_howl
+        sound_volume: 0
+        sound_pitch: 0
+    interval:
+      cast: 
+         werewolf_mob_check: 10
+         werewolf_mob_slash: 10
+    damage_dealt:
+      cast: werewolf_mob_slash
+    damage:
+      cast: anticheese
+  drops:
+  - LycanthropyTome1: 100
+    LycanthropyTome2: 100
+    LycanthropyTome3: 100
+    LycanthropyTome4: 100
+    LycanthropyTome5: 100
+    LycanthropyTome6: 100
+    bone@3: 50
+    mutton@3: 50
+    chicken@3: 50
+    beef@3: 50
+    pork@3: 50
+    rabbit@3: 50
+  - mutton@6: 50
+    chicken@6: 50
+    beef@6: 50
+    pork@6: 50
+    rabbit@6: 50

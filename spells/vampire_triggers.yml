@@ -1,0 +1,58 @@
+vampire_triggers:
+  inherit: vampire_base
+  name: Vampire Triggers
+  mode: hidden
+  passive: true
+  triggers:
+    - sneak
+  actions:
+    cast:
+    - class: Interval
+      duration: 20000
+      actions:
+        - class: CheckRequirements
+          requirements:
+            - attributes:
+              - attribute: vampire_bloods
+                min: 0.5
+          fail:
+            - class: Stop
+          actions:
+            - class: CheckInventory
+              item: air
+              invert: false
+              slot: mainhand
+              fail:
+                - class: Stop
+              actions:
+                - class: CheckInventory
+                  item: air
+                  invert: false
+                  slot: offhand
+                  fail:
+                    - class: Stop
+                  actions:
+                    - class: CheckTrigger
+                      trigger: right_click
+                      actions:
+                        - class: Cast
+                          spell: vampire_sight
+                        - class: Stop
+                - class: CheckRequirements
+                  requirements:
+                    - attributes:
+                      - attribute: vampire_bloods
+                        min: 0.5
+                  actions:
+                    - class: CheckTrigger
+                      trigger: swap
+                      actions:
+                        - class: Cast
+                          spell: vampire_transform
+                        - class: Stop
+                    - class: CheckTrigger
+                      trigger: stop_sneak
+                      actions:
+                        - class: Stop
+  parameters:
+    target: self

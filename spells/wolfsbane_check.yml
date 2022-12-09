@@ -1,0 +1,74 @@
+wolfsbane_check:
+  inherit: werewolf_base
+  name: Wolfsbane
+  mode: hidden
+  passive: true
+  actions:
+    cast:
+    - class: Interval
+      duration: 1000
+      actions:
+        - class: AreaOfEffect
+          radius: 0.3
+          actions:
+            - class: CheckEntity
+              actions:
+                - class: Damage
+        - class: CheckBlock
+          direction: down
+          allowed: grass_block,dirt,coarse_dirt,mycelium,podzol,moss_block
+          source_location: feet
+          fail:
+            - class: Damage
+          actions:
+            - class: Cast
+              spell: wolfsbane_effect
+            - class: CheckRequirements
+              requirement:
+                time:
+                  min: dusk
+                  max: dawn
+              fail:
+               - class: Stop
+            - class: CheckRequirements
+              requirement:
+                weather: clear
+              fail:
+               - class: Stop
+            - class: CheckRequirements
+              requirement:
+                indoors: false
+              fail:
+               - class: Stop
+            - class: CheckRequirements
+              requirement:
+                moon:
+                  value: 0
+              actions:
+                - class: Damage
+            - class: CheckRequirements
+              requirement:
+                moon:
+                  value: 4
+              actions:
+                - class: Probability
+                  probability: 0.0001
+                  actions:
+                    - class: Cast
+                      spell: place_wolfsbane
+                      spell_parameters:
+                        radius: 3
+                    - class: AreaOfEffect
+                      radius: 6
+                      actions:
+                        - class: ApplyCooldown
+                          duration: 60000
+                          spells:
+                            - place_wolfsbane
+                    - class: Stop
+  parameters:
+    target: self
+    effects_particles: false
+    cooldown: 500
+    target_types:
+    - armor_stand

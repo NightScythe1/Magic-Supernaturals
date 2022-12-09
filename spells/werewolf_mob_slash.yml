@@ -1,0 +1,120 @@
+werewolf_mob_slash:
+  inherit: werewolf_base
+  passive: true
+  mode: hidden
+  name: Slash
+  actions:
+    cast:
+        - class: Mount
+          dismount: true
+          eject: true
+        - class: ChangeContext
+          source_offset: 0,12,0
+          target_offset: 0,12,0
+          actions:
+            - class: AreaOfEffect # consider this an extra anticheese
+              radius: 5
+              y_radius: 10
+              actions:
+                - class: Velocity
+                  pull: 1
+                - class: PotionEffect
+                  duration: 5000
+                  add_effects:
+                    confusion: 0
+                - class: PlaySound
+                  requires_entity_target: true
+                  sound: entity_wolf_howl
+                  volume: 0.8
+                - class: PlaySound
+                  requires_entity_target: true
+                  sound: entity_wolf_growl
+                  volume: 0.8
+        - class: ConeOfEffect
+          actions:
+            - class: Damage
+            - class: Velocity
+              y_offset: 0.3
+              push: 0.7
+            - class: Probability
+              probability: 0.008
+              actions:
+                - class: CheckEntity
+                  allowed_entities:
+                    - player
+                  actions:
+                    - class: ChangeContext
+                      use_target_mage: true
+                      actions:
+                       - class: CheckRequirements
+                         requirements:
+                           - class:
+                             - vampire
+                             - werewolf
+                         fail:
+                            - class: ChangeContext
+                              swap_source_and_target: false
+                              actions:
+                                - class: CheckInventory
+                                  slot: helmet
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+                                - class: CheckInventory
+                                  slot: chestplate
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+                                - class: CheckInventory
+                                  slot: leggings
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+                                - class: CheckInventory
+                                  slot: boots
+                                  item: air
+                                  actions:
+                                    - class: ModifyMage
+                                      modify_type: unlock
+                                      mage_class: werewolf
+            - class: PlayEffects
+              effect: slash
+            - class: ChangeContext
+              target_caster: true
+              actions:
+                - class: ApplyCooldown
+                  duration: 5000
+                  spells:
+                    - werewolf_slash
+  effects:
+    slash:
+    - location: origin
+      effectlib:
+        class: Particle
+        particle: sweep_attack
+        particle_offset_x: 0.01
+        particle_offset_y: 0.01
+        particle_offset_z: 0.01
+        particle_count: 1
+    - sound: entity_player_attack_sweep
+    - sound: block_grindstone_use
+      sound_pitch: 2
+    - sound: entity_player_attack_sweep
+      delay: 200
+    - sound: block_grindstone_use
+      delay: 200
+      sound_pitch: 2
+  parameters:
+    damage: 3
+    magic_damage: false
+    target_type: LivingEntity
+    target: self
+    range: 4
+    fov: 0.1
+    cooldown: 3000
