@@ -1,0 +1,31 @@
+LycanthropyTome4:
+  creator_id: 22e0650d-d3f2-4bbc-afef-02bd3b1407ec
+  creator: NightScythe1
+  worth: 0.0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3120
+    type: WRITTEN_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: BOOK_SIGNED
+      title: Tome of Lycanthropy IV
+      author: Unknown
+      pages:
+      - '["",{"text":"Day 28","italic":true,"underlined":true},{"text":"\n\nAs I eagerly
+        await the Full Moon''s next embrace I have felt her calling to me every night.
+        The moonlight on my skin always grants me amazing abilities, albiet a fraction
+        of the powers in my new form. My nails have sharpened into tough","color":"reset"}]'
+      - '{"text":"claws, and I no longer feel the need to wield a blade in combat.
+        Tonight is a new moon, and the lack of moonlight almost hurts... I can''t
+        use any abilities today, I feel weaker than before. I can''t
+        wait to turn again... memories of my hunts are so immense, I could
+        even click the ground"}'
+      - '{"text":"to sniff out the nearest prey. My friends are anxious of me these
+        days, saying I haven''t truly considered what I''ve gotten myself into. They''re
+        probably jealous of my new power though, none of them can best me when I''m
+        under the moon, or using my claws to spar."}'
+      - '{"text":"As my newest power waxes and wanes with the moon phases, I can''t
+        help but wonder what else I can learn to do... It only took 3 transformations
+        to gain this power, what else can I do?"}'
+      generation: 3

@@ -1,0 +1,31 @@
+LycanthropyTome3:
+  creator_id: 22e0650d-d3f2-4bbc-afef-02bd3b1407ec
+  creator: NightScythe1
+  worth: 0.0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3120
+    type: WRITTEN_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: BOOK_SIGNED
+      title: Tome of Lycanthropy III
+      author: Unknown
+      pages:
+      - '["",{"text":"Day 9","italic":true,"underlined":true},{"text":"\n\nIt''s incredible!
+        The power I felt... I shed my armour, letting the moon burn into my skin...\nLast
+        night- I changed too... We were only a few steps out of the village, but the
+        moment my gaze met the Full Moon I felt it...","color":"reset"}]'
+      - '{"text":"My body had this horrible sensation of crunching... I felt my very
+        bones and organs shifting and reshaping within me, but once it was over...
+        I''d never felt more alive. My strength was incredible, my speed and agility
+        was off the charts. My friends were horrified at first, they wanted to"}'
+      - '{"text":"bring me back home to see what was wrong, but nothing is wrong!
+        I felt the woods calling to me, and I charged in, my teeth and claws making
+        short work of anything that crossed me, every kill was feeding and healing
+        me, which just bolstered my hunger for more."}'
+      - '{"text":"Once daylight cracked, my strength faded, and my body reverted to
+        its normal state. I took the spoils of my hunt home much to the shock of our
+        village- We''d be fed for months. Despite this obvious display of strength
+        my friends still feared this power, but I swear I''ll prove its usefulness."}'
+      generation: 3

@@ -1,0 +1,31 @@
+LycanthropyTome6:
+  creator_id: 22e0650d-d3f2-4bbc-afef-02bd3b1407ec
+  creator: NightScythe1
+  worth: 0.0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3120
+    type: WRITTEN_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: BOOK_SIGNED
+      title: Tome of Lycanthropy VI
+      author: Unknown
+      pages:
+      - '["",{"text":"Day 161","italic":true,"underlined":true},{"text":"\n\nThe werewolf
+        I tracked down turned out to be one of my old friends... Turns out after our
+        scuffle, I''d turned a couple of them too. It seems to have a chance to pass
+        along if I slash someone missing an armour piece, the more missing, the","color":"reset"}]'
+      - '{"text":"more likely the... ''infection...'' spreads. Anyway, after meeting
+        with my old ally they explained that this newfound bloodlust distanced them
+        from our group as well. For the sake of old times, I agreed to help them find
+        more wolfsbane to cure themself, I guess this life isn''t for everyone."}'
+      - '{"text":"One of the group at home drank the last of the Wolfsbane ''suspicious
+        stew'' they tried to give me, which totally eliminated all of the powers they''d
+        been granted. It seems this plant can rarely sprout at nighttime, but it spreads
+        under the New Moon and wilts under the Full moon,"}'
+      - '{"text":"inverse of how our powers are drawn. Our luck seemed to run out
+        though. When we finally found some to remake the stew, it didn''t take my
+        friend''s powers. Since we''ve surpassed 10 moon cycles, the stew''s effect
+        is much weaker, and only dulls our powers for a day.\nA relief, to me though."}'
+      generation: 3

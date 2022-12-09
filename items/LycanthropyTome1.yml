@@ -1,0 +1,30 @@
+LycanthropyTome1:
+  creator_id: 22e0650d-d3f2-4bbc-afef-02bd3b1407ec
+  creator: NightScythe1
+  worth: 0.0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3120
+    type: WRITTEN_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: BOOK_SIGNED
+      title: Tome of Lycanthropy I
+      author: Unknown
+      pages:
+      - '["",{"text":"Day 1","italic":true,"underlined":true},{"text":"\n\nA group
+        of my friends and I faced off against another raid on our village today. We''ve
+        been defending this spot for months, so this was nothing out of the ordinary
+        for us. At least until nightfall befell us during the height of the battle...","color":"reset"}]'
+      - '{"text":"As we were beating back the remainder of the illagers, what I assumed
+        to be a Vindicator charged at me from behind. I went to strike, but this was
+        no ordinary foe... Its eyes were crazed and ravenous, and it wielded no weapon.
+        Its body seemed to crunch and crack, some kind of"}'
+      - '{"text":"smoke emitted from its very skin. Before I could even land a hit,
+        the creature had completely changed forms into a wolf. Fighting this creature
+        was so much more difficult, its scratches and slashes were much more powerful
+        and its agility and speed were leagues better too."}'
+      - '{"text":"I finally managed to defeat it, barely escaping with my life after
+        it tore me up. My allies and I decided to retreat to our home and heal, clearly
+        there was some kind of new beast we were going to have to be wary of."}'
+      generation: 3

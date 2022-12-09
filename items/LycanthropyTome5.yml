@@ -1,0 +1,30 @@
+LycanthropyTome5:
+  creator_id: 22e0650d-d3f2-4bbc-afef-02bd3b1407ec
+  creator: NightScythe1
+  worth: 0.0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3120
+    type: WRITTEN_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: BOOK_SIGNED
+      title: Tome of Lycanthropy V
+      author: Unknown
+      pages:
+      - '["",{"text":"Day 83","italic":true,"underlined":true},{"text":"\n\nTen Full
+        Moons later, and I''m stronger than ever. I can use my sniff ability out of
+        wolf form by sneak clicking the ground, and I can even transform at will now
+        by sneaking and swapping! Granted, I cannot use items or armour as it''d crush","color":"reset"}]'
+      - '{"text":"me as I transform, and it''s not as strong without a full moon,
+        but it''s still an incredibly formidable power! Oh, and of my ''friends''
+        - I left that wretched group weeks ago... It turns out they''ve been plotting
+        against me, trying to determine the weaknesses of my new lease on life."}'
+      - '{"text":"They even offered to find a ''cure'' for me! I warned them not to
+        mention it again, but when one of them slipped Wolfsbane into my stew I lost
+        it. That foul plant stripped my powers for a whole day, it felt like a damned
+        New Moon. I struck back before I left, I can only assume"}'
+      - '{"text":"they''ve bled out in that prison they call a house. I''ve been living
+        in the wilds since leaving, and I finally feel at home. I''m on the scent
+        of another of my kind right now, maybe I can learn more if I track them down..."}'
+      generation: 3

@@ -1,0 +1,31 @@
+LycanthropyTome2:
+  creator_id: 22e0650d-d3f2-4bbc-afef-02bd3b1407ec
+  creator: NightScythe1
+  worth: 0.0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3120
+    type: WRITTEN_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: BOOK_SIGNED
+      title: Tome of Lycanthropy II
+      author: Unknown
+      pages:
+      - '["",{"text":"Day 4","italic":true,"underlined":true},{"text":"\n\nToday has
+        been rough, from the moment I got out of bed I felt my strength sapping away.
+        I assumed at first it was the aftereffects of our battle, but I already felt
+        much better the past few days. It seems that I must have picked up an","color":"reset"}]'
+      - '{"text":"infection from that feral beast that pounced me during the fight.
+        I haven''t so much as been able to fight a zombie. My friends are out right
+        now clearing up some mobs from the village area while I rest. Looking up to
+        the black empty sky, I feel an inexplicable disdain and longing for more..."}'
+      - '["",{"text":"Day 8","italic":true,"underlined":true},{"text":"\n\nMy strength
+        returned the morning after my last entry, but tonight it feels tenfold! I''m
+        practically itching for a fight, something within is calling me out to the
+        woods... My friends suggested a hunting night, as the night sky are bright
+        and clear","color":"reset"}]'
+      - '{"text":"tonight on account of the Full Moon. I''ll be heading out to join
+        them shortly- Hopefully there will be some good game tonight, I''m hoping
+        for a challenge."}'
+      generation: 3
