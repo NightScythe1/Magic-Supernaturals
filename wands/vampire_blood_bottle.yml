@@ -1,4 +1,6 @@
 vampire_blood_bottle:
   name: "&fVampire Blood Bottle"
   icon: honey_bottle{87001}
+  craftable: false
+  modifiable: false
   consume_spell: vampire_blood_eat

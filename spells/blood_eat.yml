@@ -1,0 +1,45 @@
+blood_eat:
+  actions:
+    cast:
+    - class: ChangeContext
+      use_target_mage: true
+      actions:
+       - class: CheckRequirements
+         requirements:
+           - class:
+             - vampire
+         actions:
+          - class: ModifyAttribute
+            attribute: vampire_bloods
+            value: "x+1"
+          - class: Feed
+            feed: 6
+            saturation: 10
+          - class: Delay
+            delay: 10
+          - class: GiveItem
+            item: glass_bottle
+            item_count: 1
+         fail:
+          - class: PlayEffects
+            effect: nonvamp
+          - class: Feed
+            feed: -4
+          - class: PotionEffect
+            duration: 10000
+            add_effects:
+              hunger: 0
+              confusion: 0
+          - class: Delay
+            delay: 10
+          - class: GiveItem
+            item: glass_bottle
+            item_count: 1
+  effects:
+    nonvamp:
+    - sound: entity_husk_ambient
+      sound_volume: 0.5
+      sound_pitch: 0
+  parameters:
+    target: self
+    effects_particles: false

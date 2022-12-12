@@ -151,7 +151,7 @@ vampire_bite:
                                                           confusion: 0
                                                       - class: Feed
                                                         feed: 1.0
-                                                        saturation: 30
+                                                        saturation: 15
                                                       - class: Heal
                                                         amount: 0.2
                                                       - class: ApplyCooldown
@@ -166,7 +166,7 @@ vampire_bite:
                                                           confusion: 0
                                                       - class: Feed
                                                         feed: 1.0
-                                                        saturation: 15
+                                                        saturation: 10
                                                       - class: ApplyCooldown
                                                         duration: 1500
                                                         spells:

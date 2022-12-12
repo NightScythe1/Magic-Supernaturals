@@ -1,13 +1,77 @@
 vampire_blood_eat:
-  inherit: vampire_base
   actions:
     cast:
-     - class: Delay
-       delay: 100
-     - class: ModifyMage
-       mage_class: vampire
-       modify_type: unlock
-     - class: GiveItem
-       item: glass_bottle
+    - class: ChangeContext
+      use_target_mage: true
+      actions:
+       - class: CheckRequirements
+         requirements:
+           - class:
+             - vampire
+             - werewolf
+         actions:
+          - class: Feed
+            feed: -8
+          - class: PotionEffect
+            duration: 10000
+            add_effects:
+              hunger: 0
+              confusion: 0
+          - class: Delay
+            delay: 10
+          - class: GiveItem
+            item: glass_bottle
+            item_count: 1
+         fail:
+          - class: Feed
+            feed: -8
+          - class: PotionEffect
+            duration: 10000
+            add_effects:
+              hunger: 0
+              confusion: 0
+          - class: PlayEffects
+            effect: vamp
+          - class: ModifyMage
+            mage_class: vampire
+            modify_type: unlock
+          - class: Delay
+            delay: 10
+          - class: GiveItem
+            item: glass_bottle
+            item_count: 1
+  effects:
+    vamp:
+    - sound: entity_phantom_bite
+      sound_volume: 0.5
+      sound_pitch: 0
+      location: origin
+      source_location: body
+      material: redstone_block
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.1
+        particle_offset_z: 0.1
+        particle_offset_y: 0.6
+        particle: block_crack
+        particle_data: 0.01
+        particle_count: 5
+        particle_size: 5
+        duration: 3000
+        offset: 0,-0.5,0
+    - sound: entity_zombie_villager_cure
+      sound_volume: 0.5
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.2
+        particle_offset_z: 0.2
+        particle_offset_y: 0.6
+        particle: smoke_normal
+        particle_data: 0.01
+        particle_count: 5
+        particle_size: 5
+        duration: 3000
+        offset: 0,-0.5,0
   parameters:
     target: self
+    effects_particles: false
