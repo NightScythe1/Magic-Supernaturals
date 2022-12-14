@@ -132,7 +132,7 @@ vampire_bite:
                                                     spell: vampire_bloodtracker
                                                     spell_parameters:
                                                       value: "x+1"
-                                                      cooldown: 10000
+                                                      cooldown: 7500
                                                   - class: ApplyCooldown
                                                     target_caster: true
                                                     duration: 10000
@@ -151,7 +151,6 @@ vampire_bite:
                                                           confusion: 0
                                                       - class: Feed
                                                         feed: 1.0
-                                                        saturation: 15
                                                       - class: Heal
                                                         amount: 0.2
                                                       - class: ApplyCooldown
@@ -166,7 +165,6 @@ vampire_bite:
                                                           confusion: 0
                                                       - class: Feed
                                                         feed: 1.0
-                                                        saturation: 10
                                                       - class: ApplyCooldown
                                                         duration: 1500
                                                         spells:
@@ -209,7 +207,7 @@ vampire_bite:
                                                     fail:
                                                       - class: Feed
                                                         feed: 1
-                                                        saturation: 30
+                                                        saturation: 8
                                                       - class: Heal
                                                         amount: 0.8
                                                       - class: ApplyCooldown
@@ -219,7 +217,7 @@ vampire_bite:
                                                     actions:
                                                       - class: Feed
                                                         feed: 1.5
-                                                        saturation: 15
+                                                        saturation: 12
                                                       - class: ApplyCooldown
                                                         duration: 1500
                                                         spells:

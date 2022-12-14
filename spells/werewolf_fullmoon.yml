@@ -80,7 +80,7 @@ werewolf_fullmoon:
     - class: Cast
       spell: werewolf_moontracker
       spell_parameters:
-        value: "x+1"
+        value: "x+0.34"
     - class: While
       requirement:
         moon:

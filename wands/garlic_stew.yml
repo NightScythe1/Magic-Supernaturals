@@ -1,0 +1,6 @@
+garlic_stew:
+  name: "&fSuspicious Stew"
+  icon: suspicious_stew
+  craftable: false
+  modifiable: false
+  consume_spell: garlic_eat

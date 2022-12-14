@@ -175,6 +175,7 @@ vampire_mob_bite:
     no_damage_ticks: 0
     magic_damage: false
     target: self
+    target_self: false
     target_type: LivingEntity
     range: 1.5
     fov: 0.1

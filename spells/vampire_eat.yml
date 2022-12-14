@@ -9,6 +9,17 @@ vampire_eat:
     cast:
     - class: CheckInventory
       slot: main_hand
+      item: vampire_blood_bottle
+      fail:
+        - class: CheckInventory
+          slot: off_hand
+          item: vampire_blood_bottle
+          actions:
+            - class: Stop
+      actions:
+        - class: Stop
+    - class: CheckInventory
+      slot: main_hand
       item: blood_bottle
       fail:
         - class: CheckInventory

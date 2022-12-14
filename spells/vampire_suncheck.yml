@@ -1,0 +1,69 @@
+vampire_suncheck:
+  inherit: vampire_base
+  name: Vampirism Sun
+  mode: hidden
+  passive: true
+  triggers:
+    - trigger: interval
+      interval: 2000
+  actions:
+    cast:
+    - class: CheckRequirements
+      requirements:
+        - attributes:
+          - attribute: vampire_bloods
+            min: 0.5
+      fail:
+        - class: Stop
+    - class: Interval
+      duration: 2000
+      actions:
+        - class: CheckRequirements
+          requirement:
+            indoors: false
+          actions:
+            - class: CheckRequirements
+              requirement:
+                time:
+                  min: 0
+                  max: 12000
+              actions:
+                - class: CheckRequirements
+                  requirement:
+                    weather: clear
+                  actions:
+                    - class: ApplyCooldown
+                      duration: 1500
+                      spells:
+                        - vampire_lifesteal
+                        - vampire_sight
+                        - vampire_triggers
+                        - vampire_transform
+                    - class: PotionEffect
+                      add_effects:
+                        weakness: 0
+                    - class: CheckInventory
+                      item: air
+                      slot: helmet
+                      actions:
+                        - class: Ignite
+                          duration: 1000
+                        - class: PlayEffects
+                          effect: burning
+  effects:
+    burning:
+    - location: origin
+      source_location: body
+      effectlib:
+        class: Particle
+        particle: smoke_normal
+        particle_data: 0.01
+        particle_count: 1
+        duration: 200
+        particle_offset_x: 0.2
+        particle_offset_z: 0.2
+        particle_offset_y: 0.6
+        offset: 0,0,0
+  parameters:
+    target: self
+    effects_particles: false

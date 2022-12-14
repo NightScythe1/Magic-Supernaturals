@@ -1,0 +1,11 @@
+place_garlic:
+  actions:
+    cast:
+    - class: Spread
+      actions:
+        - class: SpawnEntity
+          type: garlic_plant
+          allow_replacement: false
+  parameters:
+    range: 4
+    radius: 0

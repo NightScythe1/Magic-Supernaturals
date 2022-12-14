@@ -25,6 +25,7 @@ blood_eat:
             effect: nonvamp
           - class: Feed
             feed: -4
+            exhaustion: 20
           - class: PotionEffect
             duration: 10000
             add_effects:

@@ -42,7 +42,7 @@ vampire_triggers:
                   requirements:
                     - attributes:
                       - attribute: vampire_bloods
-                        min: 0.5
+                        min: 100
                   actions:
                     - class: CheckTrigger
                       trigger: swap

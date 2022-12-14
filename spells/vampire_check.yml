@@ -20,34 +20,6 @@ vampire_check:
       actions:
         - class: CheckRequirements
           requirement:
-            indoors: false
-          actions:
-            - class: CheckRequirements
-              requirement:
-                time:
-                  min: 0
-                  max: 12000
-              actions:
-                - class: CheckRequirements
-                  requirement:
-                    weather: clear
-                  actions:
-                    - class: ApplyCooldown
-                      duration: 1500
-                      spells:
-                        - vampire_lifesteal
-                    - class: PotionEffect
-                      add_effects:
-                        weakness: 0
-                    - class: CheckInventory
-                      item: air
-                      slot: helmet
-                      actions:
-                        - class: Ignite
-                        - class: PlayEffects
-                          effect: burning
-        - class: CheckRequirements
-          requirement:
             light:
               min: -1
               max: 1
@@ -97,8 +69,8 @@ vampire_check:
         class: Particle
         particle: smoke_normal
         particle_data: 0.01
-        particle_count: 4
-        duration: 100
+        particle_count: 1
+        duration: 200
         particle_offset_x: 0.2
         particle_offset_z: 0.2
         particle_offset_y: 0.6

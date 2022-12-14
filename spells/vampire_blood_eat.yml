@@ -12,6 +12,7 @@ vampire_blood_eat:
          actions:
           - class: Feed
             feed: -8
+            exhaustion: 20
           - class: PotionEffect
             duration: 10000
             add_effects:
@@ -25,6 +26,7 @@ vampire_blood_eat:
          fail:
           - class: Feed
             feed: -8
+            exhaustion: 20
           - class: PotionEffect
             duration: 10000
             add_effects:

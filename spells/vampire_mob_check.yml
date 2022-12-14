@@ -53,7 +53,7 @@ vampire_mob_check:
             - class: PotionEffect
               duration: 3500
               add_effects:
-                speed: 2
+                speed: 1
                 damage_resistance: 1
                 increase_damage: 0
         - class: CheckRequirements
@@ -65,7 +65,7 @@ vampire_mob_check:
             - class: PotionEffect
               duration: 3500
               add_effects:
-                speed: 2
+                speed: 1
                 damage_resistance: 0
         - class: CheckRequirements
           requirement:
@@ -76,7 +76,7 @@ vampire_mob_check:
             - class: PotionEffect
               duration: 3500
               add_effects:
-                speed: 1
+                speed: 0
         - class: CheckRequirements
           requirement:
             light:

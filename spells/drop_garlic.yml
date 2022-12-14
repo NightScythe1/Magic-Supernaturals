@@ -1,0 +1,8 @@
+drop_garlic:
+  actions:
+    cast:
+    - class: DropItem
+      item: garlic
+  parameters:
+    range: 4
+    target: self

@@ -1,0 +1,14 @@
+garlic:
+  icon: oxeye_daisy{87001}
+  name: "&fGarlic"
+  right_click: alt_cast
+  cancel_interact_on_right_click: true
+  alternate_spell: place_garlic
+  craftable: true
+  modifiable: false
+  uses: 1
+  discover_recipes:
+  - garlic_stew_craft
+  cast_parameters:
+    drops:
+    - garlic

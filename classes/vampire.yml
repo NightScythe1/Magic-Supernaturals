@@ -15,3 +15,4 @@ vampire:
     - vampire_lifesteal
     - vampire_bite
     - vampire_triggers
+    - vampire_suncheck

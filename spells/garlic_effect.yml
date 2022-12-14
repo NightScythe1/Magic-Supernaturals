@@ -1,5 +1,5 @@
-wolfsbane_effect:
-  inherit: werewolf_base
+garlic_effect:
+  inherit: vampire_base
   passive: true
   mode: hidden
   cancel_effects: true
@@ -19,28 +19,27 @@ wolfsbane_effect:
                         - class: CheckRequirements
                           requirements:
                             - class:
-                                - werewolf
+                                - vampire
                           actions:
                             - class: PotionEffect
                               duration: 5500
                               add_effects:
-                                slow: 0
-                                slow_digging: 0
                                 weakness: 0
+                                hunger: 0
                             - class: Cancel
                               spells:
-                                - werewolf_transform
+                                - vampire_transform
+                                - vampire_sight
                             - class: ApplyCooldown
                               target_caster: false
                               duration: 10000
                               spells:
-                                - werewolf_mob_transform
-                                - werewolf_mob_slash
-                                - werewolf_slash
-                                - werewolf_transform
-                                - werewolf_sniff
-                                - werewolf_triggers
-                                - werewolf_check
+                                - vampire_bite
+                                - vampire_lifesteal
+                                - vampire_transform
+                                - vampire_sight
+                                - vampire_triggers
+                                - vampire_check
   effects:
     cast:
      - location: origin

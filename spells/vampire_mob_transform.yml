@@ -8,10 +8,10 @@ vampire_mob_transform:
     - class: PlayEffects
       effect: transform
     - class: Interval
-      duration: 10000
+      duration: 20000
       actions:
         - class: ApplyCooldown
-          duration: 16000
+          duration: 30000
           spells:
             - vampire_mob_transform
         - class: CheckRequirements
@@ -45,6 +45,7 @@ vampire_mob_transform:
               radius: 24
               actions:
                 - class: Orient
+                  requires_entity_target: true
                   orient_target: false
         - class: CheckTrigger
           trigger: kill
@@ -54,6 +55,7 @@ vampire_mob_transform:
             - class: Heal
               amount: 3
         - class: Velocity
+          requires_entity_target: true
           speed: 0.4
   effects:
     undo:

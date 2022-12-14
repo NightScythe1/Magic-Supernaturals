@@ -1,60 +1,65 @@
-wolfsbane_eat:
+garlic_eat:
   actions:
     cast:
     - class: CheckRequirements
       requirements:
         - attributes:
-            - attribute: werewolf_moons
-              max: 100
+            - attribute: vampire_bloods
+              max: 100.0
       actions:
         - class: ModifyMage
-          mage_class: werewolf
+          mage_class: vampire
           modify_type: lock
         - class: ModifyAttribute
           bypass_undo: true
-          attribute: "werewolf_moons"
+          attribute: "vampire_bloods"
           value: 0
         - class: Command
           console: true
-          command: mage remove @p werewolf_transform
+          command: mage remove @p vampire_transform
         - class: Command
           console: true
-          command: mage remove @p werewolf_triggers
+          command: mage remove @p vampire_triggers
         - class: Command
           console: true
-          command: mage remove @p werewolf_sniff
+          command: mage remove @p vampire_bite
         - class: Command
           console: true
-          command: mage remove @p werewolf_slash
+          command: mage remove @p vampire_lifesteal
         - class: Command
           console: true
-          command: mage remove @p werewolf_check
+          command: mage remove @p vampire_check
         - class: Command
           console: true
-          command: mage remove @p werewolf_fullmoon
+          command: mage remove @p vampire_suncheck
+        - class: Command
+          console: true
+          command: mage remove @p vampire_sight
+        - class: Command
+          console: true
+          command: mage remove @p vampire_eat
         - class: PlayEffects
           effect: cured
       fail:
        - class: CheckRequirements
          requirements:
            - attributes:
-               - attribute: werewolf_moons
-                 min: 9.5
+               - attribute: vampire_bloods
+                 min: 100.0
          actions:
            - class: ApplyCooldown
              duration: 600000
              spells:
-              - werewolf_slash
-              - werewolf_sniff
-              - werewolf_transform
-              - werewolf_triggers
-              - werewolf_check
+              - vampire_bite
+              - vampire_check
+              - vampire_lifesteal
+              - vampire_sight
+              - vampire_transform
+              - vampire_triggers
            - class: PotionEffect
              effects_particles: false
              duration: 600000
              add_effects:
-               slow: 0
-               slow_digging: 0
                weakness: 0
            - class: PlayEffects
              effect: nerfed
@@ -64,7 +69,7 @@ wolfsbane_eat:
       item: bowl
   effects:
     nerfed:
-    - sound: entity_wolf_hurt
+    - sound: entity_bat_hurt
       sound_volume: 0.5
       location: origin
       source_location: body
@@ -82,7 +87,7 @@ wolfsbane_eat:
     - sound: entity_zombie_villager_cure
       sound_volume: 0.5
     cured:
-    - sound: entity_wolf_death
+    - sound: entity_bat_death
       sound_volume: 0.5
     - sound: entity_zombie_villager_cure
       sound_volume: 0.5
