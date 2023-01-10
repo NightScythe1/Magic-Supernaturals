@@ -67,7 +67,7 @@ vampire_mob_transform:
                           random_source_offset: -1,0,0
                           actions:
                             - class: Velocity
-                              speed: 0.3
+                              speed: 0.7
         - class: Skip
           skip: 5
           actions:
