@@ -38,10 +38,41 @@ vampire_mob_transform:
             damage_resistance: 1
             slow_digging: 2
             slow_falling: 0
+        - class: ChangeContext
+          requires_entity_target: true
+          target_caster: false
+          target: other
+          target_type: player
+          actions:
+            - class: Retarget
+              target: self
+              actions:
+                - class: AreaOfEffect
+                  requires_entity_target: true
+                  radius: 24
+                  target_source: false
+                  actions:
+                    - class: ChangeContext
+                      target_caster: true
+                      actions:
+                        - class: Skip
+                          skip: 1
+                          actions:
+                            - class: Retarget
+                              target: other
+                              actions:
+                                - class: Orient
+                                  orient_target: false
+                        - class: ChangeContext
+                          random_source_offset: -1,0,0
+                          actions:
+                            - class: Velocity
+                              speed: 0.3
         - class: Skip
           skip: 5
           actions:
             - class: AreaOfEffect
+              target_source: false
               radius: 24
               actions:
                 - class: Orient
@@ -54,9 +85,6 @@ vampire_mob_transform:
               feed: 6
             - class: Heal
               amount: 3
-        - class: Velocity
-          requires_entity_target: true
-          speed: 0.4
   effects:
     undo:
     - location: origin
@@ -107,6 +135,8 @@ vampire_mob_transform:
       sound_volume: 0.5
   parameters:
     target: self
+    target_types:
+      - player
     cancel_on_world_change: true
     cancel_on_death: true
     undo: 500

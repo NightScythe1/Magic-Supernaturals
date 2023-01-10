@@ -21,7 +21,7 @@ vampire_mob:
     damage_resistance: 0
   entity_attributes:
     generic_follow_range: 64
-    generic_attack_damage: 2
+    generic_attack_damage: 4.5
   brain:
     remove_default_goals: false
   triggers:
@@ -41,20 +41,11 @@ vampire_mob:
     damage:
       cast: anticheese
   drops:
-  - LycanthropyTome1: 100
-    LycanthropyTome2: 100
-    LycanthropyTome3: 100
-    LycanthropyTome4: 100
-    LycanthropyTome5: 100
-    LycanthropyTome6: 100
-    bone@3: 50
-    mutton@3: 50
-    chicken@3: 50
-    beef@3: 50
-    pork@3: 50
-    rabbit@3: 50
-  - mutton@6: 50
-    chicken@6: 50
-    beef@6: 50
-    pork@6: 50
-    rabbit@6: 50
+  - blood_bottle: 100
+    blood_bottle@2: 75
+    blood_bottle@3: 50
+    vampire_blood_bottle: 1
+    none: 100
+  - blood_bottle: 50
+    blood_bottle@2: 25
+    none: 100
