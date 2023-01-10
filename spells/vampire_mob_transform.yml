@@ -66,6 +66,16 @@ vampire_mob_transform:
                         - class: ChangeContext
                           random_source_offset: -1,0,0
                           actions:
+                            - class: PotionEffect
+                              effects_particles: false
+                              duration: 10000
+                              add_effects:
+                                slow_falling: 0
+                            - class: PotionEffect
+                              effects_particles: false
+                              duration: 1000
+                              add_effects:
+                                levitation: 2
                             - class: Velocity
                               speed: 0.7
         - class: Skip
