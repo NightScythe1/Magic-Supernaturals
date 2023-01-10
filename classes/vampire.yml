@@ -10,6 +10,7 @@ vampire:
       lava: 0.2
       hot_floor: 0.2
     spells:
+    - vampire_smite_trigger
     - vampire_check
     - vampire_eat
     - vampire_lifesteal

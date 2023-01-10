@@ -1,0 +1,43 @@
+vampire_smite:
+  inherit: vampire_base
+  passive: true
+  mode: hidden
+  name: Smite
+  triggers:
+    - trigger: damage
+      damage_type: physical
+  actions:
+    cast:
+     - class: CheckRequirements
+       requirements:
+         - attributes:
+             - attribute: smite
+               min: 0.1
+       fail:
+         - class: Stop
+       actions:
+        - class: ModifyVariable
+          variable: smiteamount
+          value: "smite*2.5"
+        - class: PlayEffects
+          effect: smite
+        - class: Damage
+        - class: Message
+          message: Test $smiteamount
+          message_target: false
+  effects:
+    smite:
+    - location: target
+      target_location: body
+      effectlib:
+        class: Particle
+        duration: 100
+        particle_offset_x: 0.1
+        particle_offset_y: 0.7
+        particle_offset_z: 0.1
+        particle: crit_magic
+        particle_count: 15
+        particle_data: 0.5
+  parameters:
+    target: damage_target
+    damage: smiteamount

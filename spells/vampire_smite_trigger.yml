@@ -1,0 +1,15 @@
+vampire_smite_trigger:
+  inherit: vampire_base
+  passive: true
+  mode: hidden
+  name: Smite
+  triggers:
+    - trigger: damage
+      damage_type: physical
+  actions:
+    cast:
+    - class: Cast
+      spell: vampire_smite
+      as_target: true
+  parameters:
+    target: last_damager
