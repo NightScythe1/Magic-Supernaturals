@@ -28,7 +28,7 @@ ender_avoid_arrow:
               attribute: ender_arrow_counter
               value: 0
             - class: ApplyCooldown
-              duration: 12000
+              duration: 60000
               target_caster: true
               spells:
                 - ender_avoid_arrow
