@@ -1,0 +1,77 @@
+ender_water_hurt:
+  triggers:
+    - trigger: interval
+      interval: 2000
+  actions:
+    cast:
+    - class: Interval
+      duration: 2000
+      interval: 500
+      actions:
+        - class: CheckBlock
+          allowed: water
+          source_location: feet
+          actions:
+            - class: PlayEffects
+              effect: waterdamage
+            - class: Damage
+          fail:
+            - class: CheckRequirements
+              requirement:
+                indoors: false
+              actions:
+                - class: CheckRequirements
+                  requirement:
+                    weather: clear
+                  fail:
+                    - class: CheckRequirements
+                      requirement:
+                        attribute:
+                          attribute: humidity
+                          min: 0.01
+                      actions:
+                        - class: PlayEffects
+                          effect: waterdamage
+                        - class: Damage
+  effects:
+    cooldown: []
+    cancelled: []
+    fail: []
+    deactivate: []
+    blocked: []
+    waterdamage:
+    - location: origin
+      source_location: body
+      sound: entity_player_hurt
+      sound_volume: 0.5
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,-0.2,0
+        particle_offset_z: 0.3
+        particle: damage_indicator
+        particle_count: 1
+        duration: 100
+    - location: origin
+      source_location: body
+      sound: entity_enderman_hurt
+      sound_volume: 0.3
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,-0.2,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 10
+        duration: 100
+  messages:
+    cooldown: ""
+    cancel: ""
+  parameters:
+    target: self
+    damage_type: direct
+    magic_damage: false
+    knockback_resistance: 4
+    damage: 2

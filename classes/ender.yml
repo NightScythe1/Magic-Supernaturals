@@ -1,0 +1,12 @@
+ender:
+    name: Ender
+    inherit: caster
+    passive: true
+    locked: true
+    interval: 1000
+    spells:
+    - ender_avoid_arrow
+    - ender_carved_pumpkin
+    - ender_counter_decrease
+    - ender_teleport
+    - ender_water_hurt

@@ -1,0 +1,107 @@
+ender_counter_decrease:
+  triggers:
+    - trigger: interval
+      interval: 2000
+  actions:
+    cast:
+    - class: CheckRequirements
+      requirement:
+        attribute:
+          attribute: ender_teleport_counter
+          min: 4.8
+      actions:
+        - class: ApplyCooldown
+          duration: 300000
+          target_caster: true
+          spells:
+            - ender_counter_decrease
+            - ender_teleport
+        - class: PlayEffects
+          effect: teleportsnone
+        - class: ModifyAttribute
+          attribute: ender_teleport_counter
+          value: 0
+        - class: Stop
+    - class: CheckRequirements
+      requirement:
+        attribute:
+          attribute: ender_teleport_counter
+          min: 0.2
+      actions:
+        - class: ModifyAttribute
+          attribute: ender_teleport_counter
+          value: x-0.0250
+    - class: CheckRequirements
+      requirement:
+        attribute:
+          attribute: ender_teleport_counter
+          max: 0.1
+      actions:
+        - class: Message
+          message: "&75/5"
+          message_target: false
+          message_type: action_bar
+        - class: PlayEffects
+          effect: teleportsrestocked
+        - class: ModifyAttribute
+          attribute: ender_teleport_counter
+          value: 0.25
+  effects:
+    cooldown: []
+    cancelled: []
+    fail: []
+    deactivate: []
+    blocked: []
+    teleportsrestocked:
+    - location: origin
+      source_location: body
+      sound: block_respawn_anchor_charge
+      sound_pitch: 0
+      sound_volume: 2
+      material: ender_pearl
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0.5,0
+        particle_offset_z: 0.3
+        particle: item_crack
+        particle_count: 10
+        particle_data: 0.1
+        duration: 100
+    - location: origin
+      source_location: body
+      sound: entity_ender_eye_death
+      sound_pitch: 0
+      sound_volume: 2
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 30
+        particle_data: 1
+        duration: 200
+    teleportsnone:
+    - location: origin
+      source_location: body
+      sound: block_respawn_anchor_deplete
+      sound_pitch: 0
+      sound_volume: 2
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0,0
+        particle_offset_z: 0.3
+        particle: reverse_portal
+        particle_count: 20
+        particle_data: 0.3
+        duration: 100
+  messages:
+    cooldown: ""
+    cancel: ""
+  parameters:
+    target: self

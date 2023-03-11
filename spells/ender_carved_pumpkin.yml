@@ -1,0 +1,93 @@
+ender_carved_pumpkin:
+  triggers:
+    - trigger: interval
+      interval: 1000
+  actions:
+    cast:
+    - class: ChangeContext
+      target_caster: true
+      actions:
+        - class: CheckPotionEffects
+          required:
+            - blindness
+          actions:
+            - class: Stop
+    - class: CheckBlock
+      allowed: carved_pumpkin
+      actions:
+        - class: ChangeContext
+          target_caster: true
+          actions:
+            - class: PotionEffect
+              effects_particles: false
+              duration: 5000
+              add_effects:
+                weakness: 0
+                slow: 0
+                slow_digging: 0
+            - class: PotionEffect
+              effects_particles: false
+              duration: 5000+$confusion*500
+              add_effects:
+                confusion: $confusion+1
+            - class: PlayEffects
+              effect: spooked
+      fail:
+        - class: CheckBlock
+          allowed: jack_o_lantern
+          actions:
+            - class: ChangeContext
+              target_caster: true
+              actions:
+                - class: PotionEffect
+                  effects_particles: false
+                  duration: 5000
+                  add_effects:
+                    weakness: 0
+                    slow: 0
+                    slow_digging: 0
+                - class: PotionEffect
+                  effects_particles: false
+                  duration: 4500+$confusion*500
+                  add_effects:
+                    confusion: $confusion+1
+                - class: PlayEffects
+                  effect: spooked
+          fail:
+            - class: CheckInventory
+              item: carved_pumpkin
+              slot: helmet
+              actions:
+                - class: ChangeContext
+                  target_caster: true
+                  actions:
+                    - class: PotionEffect
+                      effects_particles: false
+                      duration: 5000
+                      add_effects:
+                        weakness: 0
+                        slow: 0
+                        slow_digging: 0
+                    - class: PotionEffect
+                      effects_particles: false
+                      duration: 7500+$confusion*750
+                      add_effects:
+                        confusion: $confusion+1
+                    - class: PlayEffects
+                      effect: spooked
+  effects:
+    cooldown: []
+    cancelled: []
+    fail: []
+    deactivate: []
+    blocked: []
+    spooked:
+    - location: target
+      sound_volume: 0.1
+      sound: ambient_cave
+  messages:
+    cooldown: ""
+    cancel: ""
+  parameters:
+    target: other
+    range: 32

@@ -1,0 +1,67 @@
+ender_teleport:
+  triggers:
+    - swap
+  actions:
+    cast:
+    - class: PlayEffects
+      requires_target: true
+      effect: startloc
+    - class: Delay
+      delay: 10
+    - class: Teleport
+      requires_target: true
+    - class: ChangeContext
+      requires_target: true
+      target_caster: true
+      actions:
+        - class: ModifyAttribute
+          attribute: ender_teleport_counter
+          value: x+1.0
+        - class: FallProtection
+          duration: 500
+    - class: ApplyCooldown
+      requires_target: true
+      target_caster: true
+      duration: 3000
+      spells:
+        - ender_teleport
+    - class: ModifyVariable
+      variable: tpleft
+      value: "(5-$ender_teleport_counter)+0.5"
+    - class: Message
+      message: "&7@tpleft/5"
+      message_target: false
+      message_type: action_bar
+    - class: PlayEffects
+      requires_target: true
+      effect: endloc
+  effects:
+    startloc:
+    - location: origin
+      source_location: body
+      sound: entity_enderman_teleport
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,-0.2,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 30
+        duration: 100
+    endloc:
+    - location: origin
+      delay: 500
+      source_location: body
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,-0.2,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 30
+        duration: 100
+  parameters:
+    target: other
+    range: 12

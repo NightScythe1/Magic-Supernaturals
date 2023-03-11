@@ -1,0 +1,173 @@
+ender_avoid_arrow:
+  triggers:
+    - trigger: interval
+      interval: 1000
+  actions:
+    cast:
+    - class: CheckRequirements
+      requirement:
+        attribute:
+          attribute: ender_arrow_counter
+          max: 0.1
+      actions:
+        - class: PlayEffects
+          effect: cooldownover
+        - class: ModifyAttribute
+          attribute: ender_arrow_counter
+          value: 0.25
+      fail:
+        - class: CheckRequirements
+          requirement:
+            attribute:
+              attribute: ender_arrow_counter
+              max: 4.8
+          fail:
+            - class: PlayEffects
+              effect: maxdodge
+            - class: ModifyAttribute
+              attribute: ender_arrow_counter
+              value: 0
+            - class: ApplyCooldown
+              duration: 12000
+              target_caster: true
+              spells:
+                - ender_avoid_arrow
+          actions:
+            - class: CheckRequirements
+              requirement:
+                attribute:
+                  attribute: ender_arrow_counter
+                  min: 0.25
+              actions:
+                - class: ModifyAttribute
+                  attribute: ender_arrow_counter
+                  value: x-0.0250
+            - class: Interval
+              duration: 1000
+              actions:
+                - class: AreaOfEffect
+                  radius: 2.0
+                  actions:
+                    - class: CheckEntity
+                      on_ground: false
+                      allowed_entities:
+                        - arrow
+                        - spectral_arrow
+                        - snowball
+                        - small_fireball
+                        - fireball
+                        - dragon_fireball
+                        - trident
+                      actions:
+                        - class: ChangeContext
+                          target_caster: true
+                          actions:
+                            - class: CheckTrigger
+                              trigger: damage
+                              damage_type: projectile
+                              actions:
+                                - class: ModifyAttribute
+                                  attribute: ender_arrow_counter
+                                  value: x-1.0
+                            - class: ModifyAttribute
+                              attribute: ender_arrow_counter
+                              value: x+1.0
+                        - class: Retarget
+                          target: block
+                          range: 0
+                          actions:
+                            - class: Spread
+                              radius: 9
+                              actions:
+                                - class: Parallel
+                                  actions:
+                                    - class: PlayEffects
+                                      effect: dodge
+                                    - class: Teleport
+                                    - class: PlayEffects
+                                      effect: dodged
+                                    - class: Delay
+                                      delay: 750
+  effects:
+    cooldown: []
+    cancelled: []
+    fail: []
+    deactivate: []
+    blocked: []
+    cooldownover:
+    - location: origin
+      source_location: body
+      sound_volume: 2
+      material: ender_eye
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0.5,0
+        particle_offset_z: 0.3
+        particle: item_crack
+        particle_count: 10
+        particle_data: 0.1
+        duration: 100
+    - location: origin
+      source_location: body
+      sound: entity_ender_eye_death
+      sound_volume: 2
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 30
+        particle_data: 1
+        duration: 200
+    maxdodge:
+    - location: origin
+      source_location: body
+      sound: block_respawn_anchor_deplete
+      sound_pitch: 2
+      sound_volume: 2
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0,0
+        particle_offset_z: 0.3
+        particle: reverse_portal
+        particle_count: 20
+        particle_data: 0.3
+        duration: 100
+    dodge:
+    - location: origin
+      source_location: body
+      sound: entity_enderman_teleport
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,-0.9,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 30
+        duration: 100
+    dodged:
+    - location: origin
+      delay: 500
+      source_location: body
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,-0.9,0
+        particle_offset_z: 0.3
+        particle: portal
+        particle_count: 30
+        duration: 100
+  messages:
+    cooldown: ""
+    cancel: ""
+  parameters:
+    target: self
+    allow_max_range: true
