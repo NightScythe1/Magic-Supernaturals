@@ -39,7 +39,7 @@ vampire_mob_bite:
                           - class: Stop
                         actions:
                           - class: Probability
-                            probability: 0.003
+                            probability: 0.02
                             actions:
                               - class: ChangeContext
                                 use_target_mage: true

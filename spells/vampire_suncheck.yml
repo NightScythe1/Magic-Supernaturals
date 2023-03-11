@@ -17,6 +17,7 @@ vampire_suncheck:
         - class: Stop
     - class: Interval
       duration: 2000
+      interval: 750
       actions:
         - class: CheckRequirements
           requirement:
@@ -40,6 +41,7 @@ vampire_suncheck:
                         - vampire_triggers
                         - vampire_transform
                     - class: PotionEffect
+                      duration: 1500
                       add_effects:
                         weakness: 0
                     - class: CheckInventory
@@ -47,7 +49,7 @@ vampire_suncheck:
                       slot: helmet
                       actions:
                         - class: Ignite
-                          duration: 1000
+                          duration: 2000
                         - class: PlayEffects
                           effect: burning
   effects:

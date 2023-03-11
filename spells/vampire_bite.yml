@@ -19,6 +19,7 @@ vampire_bite:
               - class: ConeOfEffect
                 requires_entity_target: true
                 target: other
+                ignore_blocks: false
                 target_count: 1
                 actions:
                   - class: CheckEntity
@@ -38,8 +39,12 @@ vampire_bite:
                     fail:
                       - class: Stop
                     actions:
+                      - class: CheckBlock
+                        allowed: passthrough
+                        fail:
+                          - class: Stop
                       - class: CheckHealth
-                        min_health: 2
+                        min_health: 3
                         fail:
                           - class: Stop
                         actions:
@@ -93,7 +98,7 @@ vampire_bite:
                           - class: PotionEffect
                             duration: 150
                             add_effects:
-                              slow: 1
+                              slow: 3
                           - class: ApplyCooldown
                             target_caster: true
                             duration: 10000
@@ -117,7 +122,7 @@ vampire_bite:
                                             slot: off_hand
                                             actions:
                                               - class: Skip
-                                                skip: 12
+                                                skip: 9
                                                 actions:
                                                   - class: TakeItem
                                                     item: glass_bottle
@@ -226,7 +231,7 @@ vampire_bite:
     blood:
     - location: target
       sound: entity_phantom_bite
-      sound_volume: 0.1
+      sound_volume: 0.5
       source_location: body
       material: redstone_block
       effectlib:

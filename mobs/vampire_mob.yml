@@ -49,3 +49,7 @@ vampire_mob:
   - blood_bottle: 50
     blood_bottle@2: 25
     none: 100
+  - blood_bottle: 75
+    blood_bottle@2: 50
+    blood_bottle@3: 25
+    none: 100

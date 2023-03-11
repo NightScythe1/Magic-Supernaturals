@@ -140,6 +140,8 @@ vampire_transform:
             damage_resistance: 1
             increase_damage: 1
             slow_digging: 2
+        - class: FallProtection
+          duration: 15000
         - class: CheckTrigger
           trigger: kill
           actions:

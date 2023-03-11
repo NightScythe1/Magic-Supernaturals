@@ -84,8 +84,8 @@ werewolf_check:
                           value: 5
                       actions:
                         - class: PotionEffect
-                          duration: 3500
                           add_effects:
+                            jump: 0
                             speed: 0
                     - class: CheckRequirements
                       requirement:
@@ -93,8 +93,8 @@ werewolf_check:
                           value: 3
                       actions:
                         - class: PotionEffect
-                          duration: 3500
                           add_effects:
+                            jump: 0
                             speed: 0
                     - class: CheckRequirements
                       requirement:

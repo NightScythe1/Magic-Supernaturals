@@ -22,6 +22,7 @@ vampire_lifesteal:
          - zoglin
          - zombie_horse
          - skeleton_horse
+         - drowned
        fail:
          - class: Stop
        actions:
