@@ -2,6 +2,62 @@ ender_teleport:
   triggers:
     - swap
   actions:
+    alternate_sneak:
+    - class: CheckRequirements
+      requirement:
+        attribute:
+          attribute: ender_teleport_counter
+          max: 0.5
+      fail:
+        - class: Message
+          message: "&cRequires 5/5"
+          message_target: false
+          message_type: action_bar
+      actions:
+        - class: Retarget
+          range: 320
+          target: other
+          actions:
+            - class: PlayEffects
+              requires_target: true
+              effect: startloc
+            - class: Delay
+              delay: 10
+            - class: Teleport
+              direct: true
+              requires_target: true
+            - class: ChangeContext
+              requires_target: true
+              target_caster: true
+              actions:
+                - class: ModifyAttribute
+                  attribute: ender_teleport_counter
+                  value: x+5.0
+                - class: FallProtection
+                  duration: 500
+            - class: ModifyVariable
+              variable: tpleft
+              value: "(5-$ender_teleport_counter)+0.7"
+            - class: Message
+              message: "&7@tpleft/5"
+              message_target: false
+              message_type: action_bar
+            - class: PlayEffects
+              requires_target: true
+              effect: endloc
+            - class: ApplyCooldown
+              duration: 360000
+              requires_target: true
+              target_caster: true
+              spells:
+                - ender_counter_decrease
+                - ender_teleport
+            - class: PlayEffects
+              effect: teleportsnone
+            - class: ModifyAttribute
+              attribute: ender_teleport_counter
+              value: 0
+            - class: Stop
     cast:
     - class: PlayEffects
       requires_target: true
@@ -22,12 +78,12 @@ ender_teleport:
     - class: ApplyCooldown
       requires_target: true
       target_caster: true
-      duration: 3000
+      duration: 2000
       spells:
         - ender_teleport
     - class: ModifyVariable
       variable: tpleft
-      value: "(5-$ender_teleport_counter)+0.5"
+      value: "(5-$ender_teleport_counter)+0.7"
     - class: Message
       message: "&7@tpleft/5"
       message_target: false
@@ -36,6 +92,22 @@ ender_teleport:
       requires_target: true
       effect: endloc
   effects:
+    teleportsnone:
+    - location: origin
+      source_location: body
+      sound: block_respawn_anchor_deplete
+      sound_pitch: 0
+      sound_volume: 2
+      effectlib:
+        class: Particle
+        particle_offset_x: 0.3
+        particle_offset_y: 0.5
+        offset: 0,0,0
+        particle_offset_z: 0.3
+        particle: reverse_portal
+        particle_count: 20
+        particle_data: 0.3
+        duration: 100
     startloc:
     - location: origin
       source_location: body
@@ -64,4 +136,4 @@ ender_teleport:
         duration: 100
   parameters:
     target: other
-    range: 12
+    range: 16

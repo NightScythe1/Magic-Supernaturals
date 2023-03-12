@@ -11,7 +11,7 @@ ender_counter_decrease:
           min: 4.8
       actions:
         - class: ApplyCooldown
-          duration: 300000
+          duration: 180000
           target_caster: true
           spells:
             - ender_counter_decrease

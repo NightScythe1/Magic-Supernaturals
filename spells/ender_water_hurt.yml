@@ -10,7 +10,7 @@ ender_water_hurt:
       actions:
         - class: CheckBlock
           allowed: water
-          source_location: feet
+          source_location: cast
           actions:
             - class: PlayEffects
               effect: waterdamage
@@ -30,9 +30,15 @@ ender_water_hurt:
                           attribute: humidity
                           min: 0.01
                       actions:
-                        - class: PlayEffects
-                          effect: waterdamage
-                        - class: Damage
+                        - class: CheckRequirements
+                          requirement:
+                            attribute:
+                              attribute: temperature
+                              min: 0.01
+                          actions:
+                            - class: PlayEffects
+                              effect: waterdamage
+                            - class: Damage
   effects:
     cooldown: []
     cancelled: []
