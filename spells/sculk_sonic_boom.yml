@@ -1,0 +1,107 @@
+sculk_sonic_boom:
+  name: Sculk Sonic Boom
+  description: "Fires the warden's sonic boom."
+  triggers:
+    - swap
+  actions:
+    cast:
+    - class: TakeCosts
+      costs:
+        levels: 5 + $level/20
+      actions:
+        - class: ChangeContext
+          target_caster: true
+          actions:
+            - class: PotionEffect
+              duration: 1700
+              effects_particles: false
+              add_effects:
+                slow: 2
+            - class: PotionEffect
+              duration: 3000
+              effects_particles: false
+              add_effects:
+                weakness: 4
+                slow_digging: 4
+        - class: PlayEffects
+          effect: chargeboom
+        - class: ApplyCooldown
+          duration: 9000
+          target_caster: true
+          spells:
+            - sculk_sonic_boom
+            - sculk_xp_heal
+            - sculk_dmg_alert
+        - class: Delay
+          delay: 1700
+        - class: PlayEffects
+          effect: sonicboom
+        - class: Retarget
+          actions:
+            - class: ChangeContext
+              source_pitch_offset: -3
+              actions:
+                - class: CustomProjectile
+                  target: other_entity
+                  actions:
+                    - class: Damage
+                    - class: CheckEntity
+                      allowed_entities:
+                        - spectral_arrow
+                        - small_fireball
+                        - fireball
+                        - dragon_fireball
+                        - trident
+                      actions:
+                        - class: Velocity
+                          push: 10
+                          y_offset: 2
+                    - class: Velocity
+                      push: 1
+                      y_offset: 0.5
+  effects:
+    tick:
+      - location: target
+        particle: sonic_boom
+    hit_entity:
+    - location: target
+      target_location: body
+      effectlib:
+        class: Particle
+        particle_count: 40
+        particle: sculk_charge_pop
+        particle_data: 0.15
+    chargeboom:
+    - location: origin
+      source_location: body
+      relative_offset: 0.15,0,0
+      origin_offset: 0,0.25,0
+      effectlib:
+        class: Particle
+        particle: sculk_charge_pop
+        particle_data: 0.05
+        duration: 1700
+      sound: entity_warden_sonic_charge
+    sonicboom:
+    - location: origin
+      source_location: body
+      relative_offset: 0.15,0,0
+      origin_offset: 0,0.25,0
+      sound: entity_warden_sonic_boom
+      sound_volume: 4
+  parameters:
+    source_location: body
+    ignore_hit_entities: true
+    hitbox_size: 0.5
+    allow_max_range: true
+    push: 1
+    hit_count: 100
+    reorient: false
+    relative_offset: 0.15,0,0
+    origin_offset: 0,0.5,0
+    damage: $difficulty+($difficulty*$difficulty)+3
+    range: 15
+    velocity: 1000
+    damage_type: sonic_boom
+    ignore_blocks: true
+    target: none

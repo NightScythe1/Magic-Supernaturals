@@ -1,0 +1,48 @@
+sculk_xp_heal:
+  inherit: supernaturals_base
+  triggers:
+    - trigger: interval
+  actions:
+    cast:
+    - class: CheckHealth
+      max_health: health_max*0.9
+      actions:
+        - class: TakeCosts
+          costs:
+            xp: ($health_max-$health)+((4+$level)*1.5) #(($health_max-$health)*($xp*($level*0.00005)))+(4+$level)
+          actions:
+            - class: Heal
+              amount: 1
+            - class: PlayEffects
+              effect: healing
+    - class: ApplyCooldown
+      target_caster: true
+      duration: $health*125 - 300
+      spells:
+        - sculk_xp_heal
+  effects:
+    healing:
+      - location: origin
+        source_location: body
+        effectlib:
+          class: Particle
+          particle_count: 1
+          particle: sculk_soul
+          particle_data: 0.01
+          particle_offset_x: 0.4
+          particle_offset_y: 0.6
+          particle_offset_z: 0.4
+      - location: origin
+        source_location: body
+        sound: block_sculk_sensor_step
+        sound_pitch: 2
+        sound_volume: 0.05
+      - location: origin
+        sound: entity_warden_heartbeat
+        source_location: body
+        sound_volume: 1
+  messages:
+    insufficient_resources: ""
+    insufficient: ""
+  parameters:
+    target: self

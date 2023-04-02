@@ -1,0 +1,14 @@
+sculker:
+    name: Sculker
+    inherit: caster
+    passive: true
+    locked: true
+    interval: 1000
+    weakness:
+      poison: 0.6
+      wither: 0.6
+    spells:
+     - sculk_dmg_alert
+     - sculk_poison_weakness
+     - sculk_sonic_boom
+     - sculk_xp_heal

@@ -1,0 +1,22 @@
+sculk_poison_weakness:
+  inherit: supernaturals_base
+  triggers:
+    - trigger: interval
+      interval: 500
+  actions:
+    cast:
+    - class: CheckPotionEffects
+      required:
+        - wither
+        - poison
+      actions:
+        - class: ApplyCooldown
+          duration: 1000
+          target_caster: true
+          spells:
+            - sculk_xp_heal
+            - sculk_dmg_alert
+  effects:
+    cast:
+  parameters:
+    target: self

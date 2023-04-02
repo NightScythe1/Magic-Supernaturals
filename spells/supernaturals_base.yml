@@ -1,0 +1,15 @@
+supernaturals_base:
+  mode: hidden
+  hidden: true
+  passive: true
+  effects:
+    cooldown: []
+    cancelled: []
+    fail: []
+    deactivate: []
+    blocked: []
+  messages:
+    cooldown: ""
+    cancel: ""
+    fail: "&c[FAILED]&7 Error with&c [$spell]&7 Please contact&f Night#8582&7 on Discord if you see this."
+  parameters:

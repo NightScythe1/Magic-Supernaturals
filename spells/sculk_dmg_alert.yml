@@ -1,0 +1,25 @@
+sculk_dmg_alert:
+  inherit: supernaturals_base
+  triggers:
+    - trigger: damage
+      min_damage: 2.0
+  actions:
+    cast:
+    - class: Delay
+      delay: 10
+    - class: CheckHealth
+      max_health: 7.5
+      actions:
+        - class: ApplyCooldown
+          duration: 5000
+          target_caster: true
+          spells:
+            - sculk_dmg_alert
+        - class: ApplyCooldown
+          clear: true
+          spells:
+            - sculk_xp_heal
+  effects:
+    cast:
+  parameters:
+    target: self
